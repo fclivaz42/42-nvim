@@ -4,7 +4,7 @@ you are free to use it, just make sure to tune it beforehand (eg. change your 42
 
 for 42 students, what you need to edit is in `lua/config/vim_settings.lua`. you might also want to enable the built-in norminette by setting `active = true` in `lua/plugins/42norminette.lua`.
 
-**if you dont have `clangd` installed, edit `lua/config/lsp.lua` and comment or delete line 72 (which should be `require('lspconfig').clangd.setup{}`).**
+**if you dont have `clangd` installed, edit `lua/config/lsp.lua` and comment or delete line 72 (which should be `require('lspconfig').clangd.setup{}`). Then, you can install clangd with** `:Mason`.
 
 in order to install:
 
