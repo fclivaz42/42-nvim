@@ -5,6 +5,7 @@ you are free to use it, just make sure to tune it beforehand (eg. change your 42
 in order to install:
 
 ```shell
+mv ~/.config/nvim ~/.config/nvim.bak
 git clone https://github.com/fclivaz42/nvim-config ~/.config/nvim
 ```
 
