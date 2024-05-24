@@ -10,7 +10,7 @@ git clone https://github.com/fclivaz42/nvim-config ~/.config/nvim
 ```
 or 
 ```shell
-git clone git@github.com:fclivaz42/nvim-config.git /home/fclivaz/.config/nvim
+git clone git@github.com:fclivaz42/nvim-config.git ~/.config/nvim
 ```
 if you are me :)
 
