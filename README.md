@@ -8,5 +8,10 @@ in order to install:
 mv ~/.config/nvim ~/.config/nvim.bak
 git clone https://github.com/fclivaz42/nvim-config ~/.config/nvim
 ```
+or 
+```shell
+git clone git@github.com:fclivaz42/nvim-config.git /home/fclivaz/.config/nvim
+```
+if you are me :)
 
 enjoy!
