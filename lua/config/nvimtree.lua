@@ -1,4 +1,4 @@
---[[ NvimTree configuration]]--
+--[[ NvimTree configuration ]]--
 
 local function open_nvim_tree()
 	-- open the tree
