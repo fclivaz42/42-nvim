@@ -48,4 +48,4 @@ require "config.themeselect"
 
 -- Launch! :)
 vim.notify = require("notify")
-require("notify")("Use 'space-s-t' to switch between themes!")
+require("notify")("Use 'space-T' to switch between themes!")

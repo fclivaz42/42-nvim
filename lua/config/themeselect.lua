@@ -10,3 +10,6 @@
 --vim.cmd.colorscheme 'tokyonight-storm'
 --vim.cmd.colorscheme 'catppuccin-mocha'
 vim.cmd.colorscheme 'onedark'
+
+-- Switch themes easily
+vim.keymap.set('n', '<leader>T', ':Telescope colorscheme<CR>', { desc = '[T]hemes' })
