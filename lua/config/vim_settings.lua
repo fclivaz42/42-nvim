@@ -1,7 +1,12 @@
--- [[ Setting options ]]
+-- [[ Main VIM Setting options. ]]
 
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
+
+-- NOTE: If you are from 42, **you might want to edit these** :)
+-- 42 Global Variables.
+vim.g.user42 = 'fclivaz'
+vim.g.mail42 = 'fclivaz@student.42lausanne.ch'
 
 -- Set map leaders before anything else.
 vim.g.mapleader = ' '
@@ -9,11 +14,6 @@ vim.g.maplocalleader = ' '
 
 -- I have a Nerd Font so that gotta be true.
 vim.g.have_nerd_font = true
-
--- NOTE: If you are from 42, you might want to edit these :)
--- 42 Global Variables.
-vim.g.user42 = 'fclivaz'
-vim.g.mail42 = 'fclivaz@student.42lausanne.ch'
 
 -- Set tab stop and shift width to 4.
 vim.o.shiftwidth = 4

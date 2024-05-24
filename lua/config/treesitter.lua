@@ -1,5 +1,6 @@
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
+-- why is lua screaming at me...
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
 	ensure_installed = { 'bash', 'c', 'cpp', 'lua', 'python', 'rust', 'markdown', 'vimdoc', 'vim' },
@@ -63,5 +64,3 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
-
-

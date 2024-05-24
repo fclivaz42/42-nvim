@@ -5,6 +5,7 @@ local function open_nvim_tree()
 	require("nvim-tree.api").tree.open()
 end
 
+-- sets CTRL-H as the keybind to hide-show NvimTree.
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 vim.api.nvim_set_keymap("n", "<C-h>", ":NvimTreeToggle<cr>", {silent = true, noremap = true})
 

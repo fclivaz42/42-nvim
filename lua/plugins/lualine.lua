@@ -1,3 +1,7 @@
+--[[ Lualine config.
+-- You can change the colors at your will, i just set some that looked nice.
+-- Kind of a mishmash of other themes that lualine already has. ]]--
+
 local colors = {
 	black	= '#161821',
 	purple	= '#c792ea',
@@ -44,9 +48,8 @@ local personalberg = {
 }
 
 return {
-	-- Set lualine as statusline
+	-- Set lualine as statusline.
 	'nvim-lualine/lualine.nvim',
-	-- See `:help lualine.txt`
 	opts = {
 		options = {
 			icons_enabled = true,

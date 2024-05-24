@@ -1,10 +1,9 @@
 --[[ broller config :) ]] --
 
--- Set a few settings. Necessary before lazy is run.
+-- Set Vim settings. Necessary before lazy is run.
 require "config.vim_settings"
 
--- Install package manager
---    https://github.com/folke/lazy.nvim
+-- Install lazy.nvim, the package manager.
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -13,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
       'clone',
       '--filter=blob:none',
       'https://github.com/folke/lazy.nvim.git',
-      '--branch=stable', -- latest stable release
+      '--branch=stable',
       lazypath,
   }
 end
@@ -21,7 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Validate that lazy is available.
 if not pcall(require, "lazy") then
-  -- stylua: ignore
   vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
   vim.fn.getchar()
   vim.cmd.quit()

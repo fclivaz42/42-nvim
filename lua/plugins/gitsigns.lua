@@ -9,6 +9,7 @@ return {
     		delete = { text = "✕" },
     		topdelete = { text = "✕" },
     		changedelete = { text = "┋" },
+		--	those here were commented out for more "in-line" signs. you are free to switch back to them.
 		--	add = { text = '+' },
     	--	change = { text = '~' },
     	--	delete = { text = '_' },
