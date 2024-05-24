@@ -1,7 +1,7 @@
 --[[ broller config :) ]] --
 
 -- Set a few settings. Necessary before lazy is run.
-require "vim_settings"
+require "config.vim_settings"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -46,7 +46,8 @@ require "config.cmp"
 require "config.nvimtree"
 
 -- Set theme.
---vim.cmd.colorscheme 'astrotheme'
-vim.cmd.colorscheme 'onedark'
-vim.notify = require("notify")
+require "config.themeselect"
+
 -- Launch! :)
+vim.notify = require("notify")
+require("notify")("Use 'space-s-t' to switch between themes!")

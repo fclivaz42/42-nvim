@@ -43,16 +43,6 @@ local personalberg = {
 	},
 }
 
-local function get_short_cwd()
-  return vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-end
-
-local treextension = {
-	sections = {
-		lualine_a = { get_short_cwd },
-	},
-	filetypes = { 'NvimTree' }
-}
 return {
 	-- Set lualine as statusline
 	'nvim-lualine/lualine.nvim',
@@ -61,8 +51,8 @@ return {
 		options = {
 			icons_enabled = true,
 			theme = personalberg,
-			component_separators = '|',
-			section_separators = '',
+    		section_separators = { left = '', right = '' },
+			component_separators = { left = '', right = '' },
 			},
 		extensions = { 'nvim-tree', 'mason', 'lazy' },
 	},

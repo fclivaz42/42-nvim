@@ -1,0 +1,11 @@
+-- [[ Choose your theme from one of those.
+-- You can of course install your own and add them here later on! ]]--
+--
+--vim.cmd.colorscheme 'astrotheme'
+--vim.cmd.colorscheme 'neodarker'
+--vim.cmd.colorscheme 'neodarker'
+--vim.cmd.colorscheme 'tokyonight-night'
+--vim.cmd.colorscheme 'tokyonight-day'
+--vim.cmd.colorscheme 'tokyonight-storm'
+--vim.cmd.colorscheme 'catppuccin-mocha'
+vim.cmd.colorscheme 'onedark'
