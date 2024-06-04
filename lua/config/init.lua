@@ -1,25 +1,12 @@
 --[[ Config loader. ]]--
 
--- Load Telescope Settings.
-require "config.builtin.telescope"
-
--- Load Treesitter Settings.
-require "config.builtin.treesitter"
-
--- Load LSP Settings.
-require "config.builtin.lsp"
-
--- Load Autocompletion Settings.
-require "config.builtin.cmp"
-
--- Load File Tree Settings.
-require "config.builtin.nvimtree"
-
--- Set theme.
-require "config.builtin.themeselect"
+local config = ... .. "."
 
 -- Load 42 settings.
-require "42"
+require(config .. "42")
+
+-- Load builtin configs
+require(config .. "builtin")
 
 -- Load custom configs
-require "custom"
+require(config .. "custom")
