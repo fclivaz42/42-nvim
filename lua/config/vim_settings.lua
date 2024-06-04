@@ -1,12 +1,7 @@
--- [[ Main VIM Setting options. ]]
+-- [[ Main VIM Setting options. ]] --
 
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
-
--- NOTE: If you are from 42, **you might want to edit these** :)
--- 42 Global Variables.
-vim.g.user42 = 'fclivaz'
-vim.g.mail42 = 'fclivaz@student.42lausanne.ch'
 
 -- Set map leaders before anything else.
 vim.g.mapleader = ' '

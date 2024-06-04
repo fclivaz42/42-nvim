@@ -28,24 +28,12 @@ end
 -- Load Lazy and make sure every plugin is installed.
 require "lazy_load"
 
--- Load Telescope Settings.
-require "config.telescope"
-
--- Load Treesitter Settings.
-require "config.treesitter"
-
--- Load LSP Settings.
-require "config.lsp"
-
--- Load Autocompletion Settings.
-require "config.cmp"
-
--- Load File Tree Settings.
-require "config.nvimtree"
-
--- Set theme.
-require "config.themeselect"
+-- Load config/init.lua
+require "config"
 
 -- Launch! :)
 vim.notify = require("notify")
 require("notify")("Use 'space-T' to switch between themes!")
+
+-- Delete once you are finished configuring!
+require("notify")("If you see this you havent configured your stuff!!")
