@@ -87,12 +87,15 @@ As I said, this would not have been possible without these two goats:
 
 </details>
 
-Built-in themes:
+<details><summary>Built-in themes:</summary>
+
 - [AstroTheme](https://github.com/AstroNvim/astrotheme)
 - [OneDark.nvim](https://github.com/navarasu/onedark.nvim)
 - [NeoDark.nvim](https://github.com/VDuchauffour/neodark.nvim) -- RIP in piece little angle, you will be missed :(
 - [Tokyo Night](https://github.com/folke/tokyonight.nvim)
 - [Catppuccin](https://github.com/catppuccin/nvim)
+
+</details>
 
 You can contact me on Discord by sending a friend request to `broller` if you need help with anything, although I'd prefer if you could open an issue if applicable!
 
