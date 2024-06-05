@@ -15,7 +15,9 @@ git clone git@github.com:<your_name_here>/42-nvim.git ~/.config/nvim
 vim ~/.config/nvim/lua/config/42/init.lua
 ```
 Make sure to change `<your_name_here>` to your github login!
+
 This will also launch `vim` one last time to edit your `user42` and `mail42` as well as allow you to turn on the built-in `norminette`, if you want that.
+
 After that, you can simply start `nvim`! Lazy will then download and install a bunch of packages, so make sure you let it install everything before closing.
 
 ***It is also recommended if not mandatory to install a Nerd Font! [Meslo](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo) is a good one.***
@@ -36,14 +38,20 @@ You should also take a tour in the config folder! just to see whats going on, fi
 ---
 As said, 42-Nvim was made to be extended. Therefore, a `custom` subfolder exists in both the `config` and the `plugins` folders, with examples. Both `plugins/custom` and `config/custom` won't ever be changed or modified upstream - this will be where you import and configure your plugins. There are examples that are there, so feel free to explore and import whatever you'd like!
 As a reminder, if you feel like a plugin/configuration could benefit more people, you can create a pull/merge request. I will review it, and if it does improve the "distro" in any way, I'll merge it and move it to the built-ins folder.
+
 For theming, a `_themeselect.lua` file is waiting for you in the `config/custom` subfolder where you can choose which theme to use. If you want to install your own, you can always drop a `.lua` file in `plugins/themes`, as if it were an extra plugin. Once in Neovim, press Space-T to open up a theme selector!
 ### Keybinds?? Where?? Help????
 ---
 Press space, then 's' and 'h' to bring out a help menu.
+
 Control-W will be the leader key to move around.
+
 Space will be the leader key for many other binds.
+
 'g' will be the leader for code editing (eg. comment and allat)
+
 While in normal mode, pressing leader keys and doing nothing afterwards will show you which possible keybinds can be achieved. This is done thanks to [which-key](https://github.com/folke/which-key.nvim).
+
 Again, feel free to mess around and explore the config files. You may (will) learn a thing or two!
 ### Credits, contact and whatever
 ---
