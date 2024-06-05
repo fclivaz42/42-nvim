@@ -1,21 +1,87 @@
-# fclivaz' nvim config
+# 42-Nvim
+---
+### _A "community-driven" "Neovim distribution" with 42Network plugins._
 
-you are free to use it, just make sure to tune it beforehand (eg. change your 42header or delete the lua files of plugins you don't want to use.)
+Heavily based on [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) and [AstroNvim](https://github.com/AstroNvim/AstroNvim), this Neovim "distribution" (its just a configuration but shh) has been created simply because nvim-0.10.0 broke a few themes and due to that that, I wanted to make a more streamlined Neonim config that I liked and could extend. And tadaaa...
+42-Nvim was born!
 
-for 42 students, what you need to edit is in `lua/config/vim_settings.lua`. you might also want to enable the built-in norminette by setting `active = true` in `lua/plugins/42norminette.lua`.
+## Installing 42-Nvim
+---
+42-Nvim was created with expandability in mind. In order to install, forking this repository is recommended. This way, you can edit your config, change your setup etc and still be able to sync it to Github! Also, if there are any changes from upstream (here), you will be able to update without breaking your configuration. If you also end up adding plugins that could benefit the community, simply make a pull/merge request and it will be reviewed. If a general use-case is warranted, your config will be merged and moved into the built-in secion More on that later.
 
-**if you dont have `clangd` installed, edit `lua/config/lsp.lua` and comment or delete line 72 (which should be `require('lspconfig').clangd.setup{}`). Then, you can install clangd with** `:Mason`.
-
-in order to install:
-
+Once you forked this repo, simply execute the following:
 ```shell
 mv ~/.config/nvim ~/.config/nvim.bak
-git clone https://github.com/fclivaz42/nvim-config ~/.config/nvim
+git clone git@github.com:<your_name_here>/42-nvim.git ~/.config/nvim
+vim ~/.config/nvim/lua/config/42/init.lua
 ```
-or 
-```shell
-git clone git@github.com:fclivaz42/nvim-config.git ~/.config/nvim
-```
-if you are me :)
+Make sure to change `<your_name_here>` to your github login!
+This will also launch `vim` one last time to edit your `user42` and `mail42` as well as allow you to turn on the built-in `norminette`, if you want that.
+After that, you can simply start `nvim`! Lazy will then download and install a bunch of packages, so make sure everything is installed before closing.
 
-enjoy!
+***It is also recommended if not mandatory to install a Nerd Font! [Meslo](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo) is a good one.***
+### Recommended, but optional post-install steps:
+---
+`:Mason` will bring out the LSP installer, with which you can install `clang-format` and `clangd` if your system does not have `clangd` preinstalled.
+**However if `clangd` is already installed, you should edit `~/.config/nvim/lua/config/custom/_clangd.lua` and uncomment line 4.**
+
+It is also recommended to run the following:
+```shell
+chmod a+x ~/.config/nvim/.clangdflags.sh
+bash ~/.config/nvim/.clangdflags.sh
+```
+This will tell `clangd` to use the `-Wall -Werror -Wextra` flags when running.
+
+You should also take a tour in the config folder! just to see whats going on, figure out a couple keybinds maybe. I left notes and comnents everywhere (and left a bunch of comments from Kickstart.nvim)
+### Custom configuration? How do I install my own plugins? Themes?
+---
+As said, 42-Nvim was made to be extended. Therefore, a `custom` subfolder exists in both the `config` and the `plugins` folders, with examples. Both `plugins/custom` and `config/custom` won't ever be changed or modified upstream - this will be where you import and configure your plugins. There are examples that are there, so feel free to explore and import whatever you'd like!
+As a reminder, if you feel like a plugin/configuration could benefit more people, you can create a pull/merge request. I will review it, and if it does improve the "distro" in any way, I'll merge it and move it to the built-ins folder.
+For theming, a `_themeselect.lua` file is waiting for you in the `config/custom` subfolder where you can choose which theme to use. If you want to install your own, you can always drop a `.lua` file in `plugins/themes`, as if it were an extra plugin. Once in Neovim, press Space-T to open up a theme selector!
+### Credits, contact and whatever
+---
+As I said, this would not have been possible without these two goats:
+- [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
+- [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+
+**In addition, I'd like to link back to *every* built-in plugin that made this "distribution" possible.** This should make it easier to navigate and see which plugins are installed, as well as making their documentation a little bit faster to access. And of course to credit them for their amazing work :)
+- [42 Header](https://github.com/42Paris/42header)
+- [Norminette42](https://github.com/hardyrafael17/norminette42.nvim)
+- [Lazy.nvim](https://github.com/folke/lazy.nvim)
+- [vim-obsession](https://github.com/tpope/vim-obsession)
+- [vim-fugitive](https://github.com/tpope/vim-fugitive)
+- [vim-rhubarb](https://github.com/tpope/vim-obsession)
+- [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
+- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+- [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
+- [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
+- [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
+- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [Comment.nvim](https://github.com/numToStr/Comment.nvim)
+- [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+- [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
+- [nvim-lsp-notify](https://github.com/mrded/nvim-lsp-notify)
+- [nvim-notify](https://github.com/rcarriga/nvim-notify)
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [mason.nvim](https://github.com/williamboman/mason.nvim)
+- [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
+- [lualine.nvim](https://github.com/folke/nvim-lualine/lualine.nvim)
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+- [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
+- [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
+- [which-key.nvim](https://github.com/folke/which-key.nvim)
+
+Built-in themes:
+- [AstroTheme](https://github.com/AstroNvim/astrotheme)
+- [OneDark.nvim](https://github.com/navarasu/onedark.nvim)
+- [NeoDark.nvim](https://github.com/VDuchauffour/neodark.nvim) -- RIP in piece little angle, you will be missed :(
+- [Tokyo Night](https://github.com/folke/tokyonight.nvim)
+- [Catppuccin](https://github.com/catppuccin/nvim)
+
+You can contact me on Discord by sending a friend request to `broller` if you need help with anything, although I'd prefer if you could open an issue if applicable!
+
+Enjoy 42-Nvim! :)

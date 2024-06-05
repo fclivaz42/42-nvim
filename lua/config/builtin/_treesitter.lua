@@ -1,4 +1,4 @@
--- [[ Configure Treesitter ]]
+-- [[ Configure Treesitter ]]--
 -- See `:help nvim-treesitter`
 -- why is lua screaming at me...
 require('nvim-treesitter.configs').setup {

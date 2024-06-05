@@ -1,4 +1,4 @@
--- [[ 42 Settings! ]]
+-- [[ 42 Settings! ]]--
 
 -- NOTE: If you are from 42, **you might want to edit these** :)
 --

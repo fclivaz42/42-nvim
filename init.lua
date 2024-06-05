@@ -32,8 +32,12 @@ require "lazy_load"
 require "config"
 
 -- Launch! :)
+if (vim.g.user42 == nil) then
+	vim.g.user42 = vim.env.USER
+end
 vim.notify = require("notify")
-require("notify")("Use 'space-T' to switch between themes!")
+vim.notify("Welcome back " .. vim.g.user42 .. "! :)\nUse 'space-T' to switch between themes.", "info", { title = " 42-Nvim" })
 
--- Delete once you are finished configuring!
-require("notify")("If you see this you havent configured your stuff!!")
+if (vim.g.user42 == "SET YOUR USER UP") then
+vim.notify("If you see this you havent configured your stuff!\nDon't forget to take a peek to your ~/.config/nvim", "error", { title = " 42-Nvim" })
+end

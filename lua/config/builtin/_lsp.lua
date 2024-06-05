@@ -1,4 +1,4 @@
--- [[ Configure LSP ]]
+-- [[ Configure LSP ]]--
 --	This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -69,7 +69,6 @@ local servers = {
 
 -- Setup neovim lua configuration
 require('neodev').setup()
-require('lspconfig').clangd.setup{}
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -92,5 +91,3 @@ mason_lspconfig.setup_handlers {
 		}
 	end
 }
-
-
