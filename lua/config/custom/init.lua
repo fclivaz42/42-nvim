@@ -1,13 +1,15 @@
 --[[ Custom plugin config loader. ]]--
 
+-- NOTE: Those 'custom' configurations will *never* be changed upstream. you are safe to change them at will!
+
 local custom = ... .. "."
 
--- NOTE: In those files, you would load the settings of a plugin called 'time' and a plugin called 'space' respectively.
---
--- NOTE: in order to load your plugins, you must put
--- 'require(custom .. "myplugin")'
--- for every lua file that you have.
--- eg. if you have a file called time.lua and a file called space.lua, you would put:
--- require(custom .. "time")
--- require(custom .. "space")
+-- NOTE: in order to load the config for your plugins, you must put
+-- 'require(custom .. "myplugin")' for every lua file that you have.
 -- I personally recommend prepending "_" to your config files to differentiate from the init.lua.
+
+-- As an example, we will load the clangd configuration here:
+require(custom .. "_clangd")
+
+-- And here, we will set your default theme
+require(custom .. "_themeselect")

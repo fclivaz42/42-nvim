@@ -16,6 +16,3 @@ require(config .. "_cmp")
 
 -- Load File Tree Settings.
 require(config .. "_nvimtree")
-
--- Set theme.
-require(config .. "_themeselect")
