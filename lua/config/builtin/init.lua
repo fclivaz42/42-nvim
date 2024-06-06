@@ -16,3 +16,6 @@ require(config .. "_cmp")
 
 -- Load File Tree Settings.
 require(config .. "_nvimtree")
+
+-- Load Lua Line Wrap extension
+require(config .. "_wrap_lualine")
