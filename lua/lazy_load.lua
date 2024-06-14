@@ -2,13 +2,11 @@
 
 require('lazy').setup({
 	-- First, some plugins that don't require any configuration
-	{
-		'tpope/vim-obsession',
-		lazy = true
-	},
+	'tpope/vim-obsession',
 	'tpope/vim-fugitive',
 	'tpope/vim-surround',
 	'nvim-tree/nvim-web-devicons',
+	-- Deprecated nvim-tree, but I left it just in case.
 --	'nvim-tree/nvim-tree.lua',
 
 	-- Then load every 42 plugin...

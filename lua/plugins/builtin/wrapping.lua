@@ -3,6 +3,7 @@ return {
 	lazy = true,
 	opts = {
 		softener = {
+			markdown = true,
 			text = true,
 			txt = true
 		}
