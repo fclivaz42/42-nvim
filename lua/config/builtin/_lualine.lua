@@ -1,7 +1,7 @@
 local function getMode()
 	local var = require('wrapping').get_current_mode()
 	if var == nil then
-		return [[󰞔]]
+		return [[]]
 	elseif var == 'soft' then
 		return [[󱞥]]
 	else
