@@ -1,7 +1,6 @@
 return {
 	-- The default theme for AstroNvim, which is really pretty but not for me.
 	"AstroNvim/astrotheme",
-
 	opts = {
 		palette = "astrolight", -- String of the default palette to use when calling `:colorscheme astrotheme`
 		background = { -- :h background, palettes to use when using the core vim background colors

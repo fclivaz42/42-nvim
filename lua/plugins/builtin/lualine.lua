@@ -59,6 +59,7 @@ return {
 			},
 		extensions = {
 			'nvim-tree',
+			'neo-tree',
 			'mason',
 			'lazy'
 		}

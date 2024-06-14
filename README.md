@@ -8,19 +8,24 @@ Heavily based on [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) an
 ---
 42-Nvim was created with expandability in mind. In order to install, forking this repository is recommended. This way, you can edit your config, change your setup, etc and still be able to sync it to Github! Also, if there are any changes from upstream (here), you will be able to update without breaking your configuration. If you also end up adding plugins that could benefit the community, simply make a pull/merge request and it will be reviewed. If a general use-case is warranted, your config will be merged and moved into the built-in section. More on that later.
 
-Once you forked this repo, simply execute the following:
+Once you forked this repo, simply execute the following (make sure to change `<your_name_here>` to your github login!):
 ```shell
 mv ~/.config/nvim ~/.config/nvim.bak
 git clone git@github.com:<your_name_here>/42-nvim.git ~/.config/nvim
 vim ~/.config/nvim/lua/config/42/init.lua
 ```
-Make sure to change `<your_name_here>` to your github login!
 
 This will also launch `vim` one last time to edit your `user42` and `mail42` as well as allow you to turn on the built-in `norminette`, if you want that.
 
-After that, you can simply start `nvim`! Lazy will then download and install a bunch of packages, so make sure you let it install everything before closing.
+Once that is done, you can simply start `nvim`! Lazy will then download and install a bunch of packages, so make sure you let it install everything before closing.
 
-***It is also recommended if not mandatory to install a Nerd Font! [Meslo](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo) is a good one.***
+**You should also install a few dependencies for extra functionality:**
+- `gcc`, `git`, `make`, `unzip` which _should_ be pre-installed, but it's better to double-check.
+- [lazygit](https://github.com/jesseduffield/lazygit)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- ***Install a Nerd Font for extra glyphs! [Meslo](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo) is a good one.***
+If you cannot install those dependencies on 42 iMacs (eg. with [brew](https://github.com/kube/42homebrew)), you can always download the binaries and put them in your `PATH`.
+
 ### Recommended, but optional post-install steps:
 ---
 `:Mason` will bring out the LSP installer, with which you can install software such as `clang-format` and most importantly `clangd` if your system does not have it preinstalled.
@@ -34,12 +39,14 @@ bash ~/.config/nvim/.clangdflags.sh
 This will tell `clangd` to use the `-Wall -Werror -Wextra` flags when running.
 
 You should also take a tour in the config folder! just to see whats going on, figure out a couple keybinds maybe. I left notes and comnents everywhere, explaining which plugin does what (and left a bunch of comments that were imported from [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Again, huge kudos to them).
+
 ### Custom configuration? How do I install my own plugins? Themes?
 ---
 As said, 42-Nvim was made to be extended. Therefore, a `custom` subfolder exists in both the `config` and the `plugins` folders, with examples. Both `plugins/custom` and `config/custom` won't ever be changed or modified upstream - this will be where you import and configure your plugins. There are examples that are there, so feel free to explore and import whatever you'd like!
 As a reminder, if you feel like a plugin/configuration could benefit more people, you can create a pull/merge request. I will review it, and if it does improve the "distro" in any way, I'll merge it and move it to the built-ins folder.
 
 For theming, a `_themeselect.lua` file is waiting for you in the `config/custom` subfolder where you can choose which theme to use. If you want to install your own, you can always drop a `.lua` file in `plugins/themes`, as if it were an extra plugin. Once in Neovim, press Space-T to open up a theme selector!
+
 ### Keybinds?? Where?? Help????
 ---
 Press space, then 's' and 'h' to bring out a help menu.
@@ -53,6 +60,7 @@ Space will be the leader key for many other binds.
 While in normal mode, pressing leader keys and doing nothing afterwards will show you which possible keybinds can be achieved. This is done thanks to [which-key](https://github.com/folke/which-key.nvim).
 
 Again, feel free to mess around and explore the config files. You may (will) learn a thing or two!
+
 ### Credits, contact and whatever
 ---
 As I said, this would not have been possible without these two goats:
@@ -69,10 +77,16 @@ As I said, this would not have been possible without these two goats:
 - [vim-obsession](https://github.com/tpope/vim-obsession)
 - [vim-fugitive](https://github.com/tpope/vim-fugitive)
 - [vim-rhubarb](https://github.com/tpope/vim-obsession)
-- [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
+- [vim-surround](https://github.com/tpope/vim-surround)
+- [dashboard-nvim](https://github.com/nvimdev/dashboard-nvim)
+- [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
+- [nvim-window-picker](https://github.com/s1n7ax/nvim-window-picker)
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+- [image.nvim](https://github.com/3rd/image.nvim)
+- [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 - [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+- [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim)
 - [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
 - [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
@@ -92,6 +106,7 @@ As I said, this would not have been possible without these two goats:
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [which-key.nvim](https://github.com/folke/which-key.nvim)
+- [wrapping.nvim](https://github.com/andrewferrier/wrapping.nvim)
 
 </details>
 

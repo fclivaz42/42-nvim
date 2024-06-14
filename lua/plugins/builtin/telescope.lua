@@ -1,7 +1,13 @@
 return {
 	-- Fuzzy Finder (files, lsp, etc)
-	'nvim-telescope/telescope.nvim',
-	'nvim-telescope/telescope-ui-select.nvim',
+	{
+		'nvim-telescope/telescope.nvim',
+		lazy = true,
+	},
+	{
+		'nvim-telescope/telescope-ui-select.nvim',
+		lazy = true,
+	},
 	branch = '0.1.x',
 	dependencies = {
 		'nvim-lua/plenary.nvim',
