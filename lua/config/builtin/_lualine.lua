@@ -9,21 +9,12 @@ local function getMode()
 	end
 end
 
-local dashboard = {
-	sections = {},
-	filetypes = {
-		statusline = {
-			'dashboard'
-		},
-		winbar = {
-			'dashboard'
-		}
-	},
-}
-
 require('lualine').setup {
-	disabled_filetypes = {
-		'dashboard'
+	options = {
+		disabled_filetypes = {
+			'dashboard',
+			'Dashboard'
+		}
 	},
 	sections = {
 		lualine_c = {
@@ -39,7 +30,6 @@ require('lualine').setup {
 		'nvim-tree',
 		'neo-tree',
 		'mason',
-		'lazy',
-		dashboard
+		'lazy'
 	}
 }

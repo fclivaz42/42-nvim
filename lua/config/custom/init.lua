@@ -8,8 +8,5 @@ local custom = ... .. "."
 -- 'require(custom .. "myplugin")' for every lua file that you have.
 -- I personally recommend prepending "_" to your config files to differentiate from the init.lua.
 
--- As an example, we will load the clangd configuration here:
-require(custom .. "_clangd")
-
--- And here, we will set your default theme
+-- As an example, we will set your default theme here:
 require(custom .. "_themeselect")

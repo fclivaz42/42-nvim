@@ -18,7 +18,7 @@ require(config .. "_cmp")
 --require(config .. "_nvimtree")
 
 -- Load File Tree Settings.
-require(config .. "_neotree")
+require(config .. "_neo-tree")
 
 -- Load Lua Line Extensions
 require(config .. "_lualine")

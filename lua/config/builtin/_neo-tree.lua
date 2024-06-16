@@ -16,7 +16,25 @@ end
 require("neo-tree").setup({
 	source_selector = {
 		winbar = true,
-		satusline = true
+		content_layout = 'center',
+		sources = {
+			{
+				source = 'filesystem',
+				display_name = '󰉓 '
+			},
+			{
+				source = 'buffers',
+				display_name = '󰈚 '
+			},
+			{
+				source = 'git_status',
+				display_name = '󰊢 '
+			},
+			{
+				source = 'document_symbols',
+				display_name = '󰊕'
+			}
+		},
 	},
 	close_if_last_window = false,
 	sources = {
@@ -27,12 +45,15 @@ require("neo-tree").setup({
 	},
 	window = {
 		position = "left",
-		width = 40,
+		width = 32,
 		mapping_options = {
-		noremap = true,
-		nowait = true,
+			noremap = true,
+			nowait = true,
 		},
 		mappings = {
+			['e'] = function() vim.cmd('Neotree focus filesystem left') end,
+			['b'] = function() vim.cmd('Neotree focus buffers left') end,
+			['g'] = function() vim.cmd('Neotree focus git_status left') end,
 			["<space>"] = {
 				"toggle_node",
 				nowait = false
@@ -49,8 +70,8 @@ require("neo-tree").setup({
 			},
 			-- Read `# Preview Mode` for more information
 			["l"] = "focus_preview",
-			["<C-V>"] = "vsplit_with_window_picker",
-			["<C-X>"] = "split_with_window_picker",
+			["<C-v>"] = "vsplit_with_window_picker",
+			["<C-x>"] = "split_with_window_picker",
 			-- ["S"] = "split_with_window_picker",
 			-- ["s"] = "vsplit_with_window_picker",
 			["t"] = "open_tabnew",

@@ -2,7 +2,10 @@ return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
 	dependencies = {
-		"nvim-lua/plenary.nvim",
+		{
+			"nvim-lua/plenary.nvim",
+			lazy = true
+		},
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		{
 			"MunifTanjim/nui.nvim",
@@ -14,10 +17,24 @@ return {
 		},
 		{
 			"s1n7ax/nvim-window-picker",
-			lazy = true,
+			event = 'VeryLazy',
 			opts = {
 				hint = 'statusline-winbar',
-				selection_chars= '1234567890QWERTYUIOP'
+				selection_chars= 'QWERTYUIOPASDFGHJKL',
+			    highlights = {
+					statusline = {
+            			focused = {
+							fg = '#ededed',
+							bg = '#e35e4f',
+							bold = true,
+						},
+						unfocused = {
+							fg = '#ededed',
+							bg = '#44cc41',
+							bold = true,
+						},
+					},
+				}
 			}
 		}
 	}

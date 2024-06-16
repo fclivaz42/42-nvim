@@ -64,3 +64,9 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
+
+vim.filetype.add({
+	extension = {
+		tpp = "hpp",
+	}
+})

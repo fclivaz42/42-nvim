@@ -38,7 +38,12 @@ return {
 				'     ██║███████╗      ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║',
 				'     ╚═╝╚══════╝      ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
 				'',
-				},
+			},
+			hide = {
+				statusline = true,
+				tabline = true,
+				winbar = true
+			},
 			shortcut = {
 				{
 					icon = '󰊳 ',
@@ -69,15 +74,13 @@ return {
 					key = 'P',
 				},
 			},
-			hide = {
-				statusline = true,
-				tabline = true,
-				winbar = true
-			},
 			footer = {
 				'',
 				'Don\'t forget to check upstream for updates!',
 				'Have a nice day :)'
+			},
+			project = {
+				action = 'Neotree focus filesystem left reveal_force_cwd=true dir=',
 			}
 		},
 	}
