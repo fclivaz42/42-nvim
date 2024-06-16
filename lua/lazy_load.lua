@@ -6,8 +6,18 @@ require('lazy').setup({
 	'tpope/vim-fugitive',
 	'tpope/vim-surround',
 	'nvim-tree/nvim-web-devicons',
+	{
+		'NvChad/nvim-colorizer.lua',
+		config = true
+	},
+	{
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		config = true
+	},
+
 	-- Deprecated nvim-tree, but I left it just in case.
---	'nvim-tree/nvim-tree.lua',
+	-- 'nvim-tree/nvim-tree.lua',
 
 	-- Then load every 42 plugin...
 	-- NOTE: If you are not from 42 or don't know what it is,
