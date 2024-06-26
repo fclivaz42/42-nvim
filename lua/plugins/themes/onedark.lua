@@ -5,7 +5,7 @@ return {
 		style = 'deep',
 		-- ...switch themes using this keybind!
 		toggle_style_key = "<leader>st",
-		term_colors = false,
+		term_colors = true,
 		lualine = {
 			transparent = true
 		}

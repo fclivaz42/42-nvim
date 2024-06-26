@@ -52,7 +52,13 @@ end
 --	If you want to override the default filetypes that your language server will attach to you can
 --	define the property 'filetypes' to the map in question.
 local servers = {
-	-- clangd = {},
+	clangd = {
+		filetypes = {
+			'c', 'h', 'm',
+			'mm', 'cc',
+			'cpp', 'cxx','c++','hpp', 'hxx', 'h++', 'tpp', 'ipp'
+		}
+	},
 	-- gopls = {},
 	-- pyright = {},
 	-- rust_analyzer = {},
@@ -67,8 +73,12 @@ local servers = {
 	},
 }
 
--- Setup neovim lua configuration
-require('neodev').setup()
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+	pattern = "*.tpp",
+	callback = function()
+		vim.bo.filetype = "cpp"
+	end
+})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -54,9 +54,8 @@ return {
 		options = {
 			icons_enabled = true,
 			theme = personalberg,
-    		section_separators = { left = '', right = '' },
-			component_separators = { left = '', right = '' },
-			},
-		extensions = { 'nvim-tree', 'mason', 'lazy' },
+    		section_separators = { left = '', right = '' },
+			component_separators = { left = '', right = '' },
+		},
 	},
 }
