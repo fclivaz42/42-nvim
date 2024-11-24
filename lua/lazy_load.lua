@@ -7,7 +7,8 @@ require('lazy').setup({
 	'tpope/vim-surround',
 	'nvim-tree/nvim-web-devicons',
 	{
-		'NvChad/nvim-colorizer.lua',
+		'brenoprata10/nvim-highlight-colors',
+	--	'NvChad/nvim-colorizer.lua',
 		config = true
 	},
 	{
