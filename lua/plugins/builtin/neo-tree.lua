@@ -11,14 +11,14 @@ return {
 			"MunifTanjim/nui.nvim",
 			lazy = true
 		},
-		-- {
-		-- 	"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-		-- 	build = false,
-		-- 	lazy = true,
-		-- 	opts = {
-		-- 		processor = "magick_cli"
-		-- 	}
-		-- },
+		{
+			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			build = false,
+			lazy = true,
+			opts = {
+				processor = "magick_cli"
+			}
+		},
 		{
 			"s1n7ax/nvim-window-picker",
 			event = 'VeryLazy',
