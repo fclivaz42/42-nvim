@@ -20,6 +20,17 @@ local function pullConfig()
 	end
 end
 
+local function fetchUpstream()
+	vim.cmd("cd ~/.config/nvim")
+	vim.cmd("silent !git fetch upstream")
+	vim.cmd("silent !git merge upstream/main -m 'Update 42-Nvim'")
+	if (vim.v.shell_error ~= 0) then
+		vim.notify("Error merging from upstsream.\nPlease manually review it.")
+	else
+		vim.notify("42-Nvim updated!")
+	end
+end
+
 return {
 	'nvimdev/dashboard-nvim',
 	event = 'VimEnter',
@@ -53,11 +64,11 @@ return {
 					key = 'u'
 				},
 				{
-					icon = ' ',
-					desc = 'Search Files',
+					icon = '󰑓 ',
+					desc = 'Update 42-Nvim',
 					group = 'Label',
-					action = 'Telescope find_files',
-					key = 'f',
+					action = fetchUpstream,
+					key = 'U',
 				},
 				{
 					icon = ' ',
