@@ -11,34 +11,20 @@ return {
 			"MunifTanjim/nui.nvim",
 			lazy = true
 		},
-		-- {
-		-- 	"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-		-- 	build = false,
-		-- 	lazy = true,
-		-- 	opts = {
-		-- 		processor = "magick_cli"
-		-- 	}
-		-- },
 		{
 			"s1n7ax/nvim-window-picker",
+			name = 'window-picker',
 			event = 'VeryLazy',
 			opts = {
 				hint = 'statusline-winbar',
 				selection_chars= 'QWERTYUIOPASDFGHJKL',
-			    highlights = {
-					statusline = {
-            			focused = {
-							fg = '#ededed',
-							bg = '#e35e4f',
-							bold = true,
-						},
-						unfocused = {
-							fg = '#ededed',
-							bg = '#44cc41',
-							bold = true,
-						},
-					},
-				}
+				vim.api.nvim_create_autocmd("ColorScheme", {
+					pattern = "*",
+					callback = function()
+						vim.api.nvim_set_hl(0, "WindowPickerStatusLine", { bold = true, bg = "#e35e4f", fg = "#ededed"})
+						vim.api.nvim_set_hl(0, "WindowPickerStatusLineNC", { bold = true, bg = "#333355", fg = "#FFFFFF"})
+					end
+				})
 			}
 		}
 	}
