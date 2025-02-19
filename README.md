@@ -37,6 +37,19 @@ This will tell `clangd` to use the `-Wall -Werror -Wextra` flags when running.
 You should also take a tour in the config folder! just to see whats going on, figure out a couple keybinds maybe. I left notes and comnents everywhere, explaining which plugin does what (and left a bunch of comments that were imported from [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). Again, huge kudos to them).
 
 ---
+## Updating 42-Nvim:
+There are two ways to update 42-Nvim. The first one (and the easiest one) is to simply enter `nvim` and press `<Shift>-U` at the dashboard, which will fetch upstream and merge it into your branch.
+The second way is as simple as installing it. You can either run the script locally:
+```shell
+bash ~/.config/nvim/install.sh update
+```
+Or update using the latest script in my repo:
+```shell
+curl -fsSL https://raw.githubusercontent.com/fclivaz42/42-nvim/refs/heads/main/install.sh -o installer.sh && bash installer.sh update
+```
+This should add `upstream`, fetch and merge automatically. Make sure to double-check everything happened properly. The current version should be shown at the bottom of your Dashboard.
+
+---
 ## Custom configuration? How do I install my own plugins? Themes?
 As said, 42-Nvim was made to be extended. Therefore, a `custom` subfolder exists in both the `config` and the `plugins` folders, with examples. Both folders `plugins/custom` and `config/custom` should not be changed or modified upstream (but I might place lua files from deprecated plugins if you wish to keep them) - this will be where you import and configure your plugins. There are examples that are there, so feel free to explore and import whatever you'd like!
 As a reminder, if you feel like a plugin/configuration could benefit more people, you can create a pull/merge request. I will review it, and if it does improve the "distro" in any way, I'll merge it and move it to the built-ins folder.
