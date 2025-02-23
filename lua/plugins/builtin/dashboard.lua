@@ -87,7 +87,7 @@ return {
 			},
 			footer = {
 				'',
-				'42-Nvim V1.4',
+				'42-Nvim V1.5',
 				'[ ] https://github.com/fclivaz42/42-nvim',
 				'Have a nice day :)'
 			},

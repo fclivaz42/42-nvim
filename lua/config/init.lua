@@ -8,5 +8,8 @@ require(config .. "42")
 -- Load builtin configs
 require(config .. "builtin")
 
+-- Load extra configs
+require(config .. "extra")
+
 -- Load custom configs
 require(config .. "custom")
