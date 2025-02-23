@@ -28,7 +28,7 @@ if not pcall(require, "lazy") then
 end
 
 -- Load Lazy and make sure every plugin is installed.
-require "lazy_load"
+require "plugins"
 
 -- Load config/init.lua which will load every plugin configuration.
 require "config"
@@ -39,6 +39,25 @@ if (vim.g.user42 == nil) then
 end
 
 vim.notify = require("notify")
+if vim.g.receiveupdates == true then
+	vim.loop.spawn('git', {
+		args = {'fetch', 'upstream'},
+		stdio = {nil, 1, 2}
+		},
+		function(code, _)
+			if code ~= 0 then
+				vim.notify("Could not fetch upstream for updates.")
+			end
+		end
+	)
+
+	local mainc = vim.fn.system('git log -n 1 --pretty=format:"%H" HEAD')
+	local upstc = vim.fn.system('git log -n 1 --pretty=format:"%H" upstream/main')
+
+	if mainc ~= upstc then
+		vim.notify("Update available!", "warn", { title = " 42-Nvim"})
+	end
+end
 
 if (vim.g.user42 ~= "SET YOUR USER UP") then
 	vim.notify("Welcome back " .. vim.g.user42 .. "! :)\nUse 'space-T' to switch between themes.", "info", { title = " 42-Nvim" })
