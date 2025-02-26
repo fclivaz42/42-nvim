@@ -3,7 +3,7 @@
 -- why is lua screaming at me...
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
-	ensure_installed = { 'bash', 'c', 'cpp', 'lua', 'python', 'rust', 'markdown', 'vimdoc', 'vim' },
+	ensure_installed = require("config.ts_languages"),
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = false,

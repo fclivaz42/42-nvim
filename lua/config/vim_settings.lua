@@ -3,6 +3,10 @@
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- Would you like to be notified whenever 42-Nvim has an update available?
+-- NOTE: 42-Nvim will never update without your explicit order!
+vim.g.receiveupdates = false
+
 -- Set map leaders before anything else.
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
