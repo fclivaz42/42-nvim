@@ -34,6 +34,34 @@ local function writeToDache(content)
 	vim.loop.fs_close(fd)
 end
 
+local function openhandler(args)
+	local fltype = vim.filetype.match({ filename = args.path })
+	if fltype ~= nil and fltype ~= 'pdf' then
+		return { handled = false }
+	end
+	local mimetype = vim.fn.system("file --mime-type -L -b " .. args.path)
+	if string.find(mimetype, "text") or string.find(mimetype, "empty") or string.find(mimetype, "json") then
+		return { handled = false }
+	end
+
+	local openfunc
+	local os = vim.fn.system("uname -s")
+
+	if os == "Linux\n" then
+		openfunc = "xdg-open"
+	elseif os == "Darwin\n" then
+		openfunc = "open"
+	end
+	vim.loop.spawn(openfunc, { args = { args.path } },
+	function(code, _)
+		if code ~= 0 then
+			vim.notify("Error opening " .. args.path)
+		end
+	end)
+	vim.notify("Externally opened " .. args.path)
+	return { handled = true }
+end
+
 require("neo-tree").setup({
 	source_selector = {
 		winbar = true,
@@ -63,6 +91,12 @@ require("neo-tree").setup({
 		'buffers',
 		'git_status',
 		'document_symbols'
+	},
+	event_handlers = {
+		{
+			event = "file_open_requested",
+			handler = openhandler
+		}
 	},
 	window = {
 		position = "left",

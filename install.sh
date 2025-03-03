@@ -37,7 +37,7 @@ install() {
 		read -p "Please enter your GitHub login: " GITNAME
 		read -p "Is '$GITNAME' correct? [y/n] " ANSWER
 		case "$ANSWER" in
-			[yY][eE][sS] | [yY]) echo "Cloning..."
+			[yY][eE][sS] | [yY]) echo "Continuing."
 			;;
 			[nN][oO] | [nN]) echo "Restarting."
 			;;
@@ -46,9 +46,34 @@ install() {
 		esac
 	done
 
+	ANSWER=""
+	until [[ "$FORKED" =~ [yY][eE][sS] || "$FORKED" =~ [yY] ||"$FORKED" =~ [nN][oO] || "$FORKED" =~ [nN] ]]; do
+		read -p "Have you renamed your fork? [y/n] " FORKED
+		case "$FORKED" in
+			[yY][eE][sS] | [yY])
+			until [[ "$ANSWER" =~ [yY][eE][sS] || "$ANSWER" =~ [yY] ]]; do
+				read -p "Please enter your fork name: " GITDIR
+				read -p "Is '$GITDIR' correct? [y/n] " ANSWER
+				case "$ANSWER" in
+					[yY][eE][sS] | [yY]) echo "Cloning..."
+					;;
+					[nN][oO] | [nN]) echo "Restarting."
+					;;
+					*) echo "Unknown choice." && ANSWER="no"
+					;;
+				esac
+			done
+			;;
+			[nN][oO] | [nN]) echo "Cloning..." && GITDIR="42-nvim"
+			;;
+			*) echo "Unknown choice." && ANSWER="no"
+			;;
+		esac
+	done
+
 	[ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.bak
 	mkdir -p ~/.config/nvim
-	git clone git@github.com:$GITNAME/42-nvim.git ~/.config/nvim
+	git clone git@github.com:$GITNAME/$GITDIR.git ~/.config/nvim
 	cd ~/.config/nvim
 	git remote add upstream https://github.com/fclivaz42/42-nvim.git
 
@@ -163,12 +188,13 @@ install() {
 	echo "All done!"
 
 	echo "Checking dependencies..."
-	gcc -v &>/dev/null || echo "WARNING: 'gcc' NOT INSTALLED!"
-	git -v &>/dev/null || echo "WARNING: 'git' NOT INSTALLED! (HOW?!)"
-	make -v &>/dev/null || echo "WARNING: 'make' NOT INSTALLED!"
-	unzip -v &>/dev/null || echo "WARNING: 'unzip' NOT INSTALLED!"
-	lazygit -v &>/dev/null || echo "WARNING: 'lazygit' NOT INSTALLED!"
-	rg -V &>/dev/null || echo "WARNING: 'ripgrep' NOT INSTALLED!"
+	gcc -v &>/dev/null || echo "WARNING: 'gcc' not installed!"
+	git -v &>/dev/null || echo "WARNING: 'git' not installed! (how??)"
+	make -v &>/dev/null || echo "WARNING: 'make' not installed!"
+	unzip -v &>/dev/null || echo "WARNING: 'unzip' not installed!"
+	lazygit -v &>/dev/null || echo "WARNING: 'lazygit' not installed!"
+	lazydocker --version &>/dev/null || echo "WARNING: 'lazydocker' not installed!"
+	rg -V &>/dev/null || echo "WARNING: 'ripgrep' not installed!"
 
 	echo "End of the installer. If some dependencies are not installed, please do so, else 42-Nvim will have weird and undefined behavior."
 	echo "Enjoy 42-Nvim! And if you got issues or an improvement, feel free to open an issue or a PR/MR on GitHub :)"
