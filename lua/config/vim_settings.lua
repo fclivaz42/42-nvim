@@ -66,7 +66,7 @@ vim.o.termguicolors = true
 
 -- Configure how new splits should be opened
 vim.opt.splitright = false
-vim.opt.splitbelow = true
+vim.opt.splitbelow = false
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
