@@ -1,5 +1,5 @@
-# 42-Nvim
-### _A "community-driven" Neovim configuration supercharged for 42 Students._
+# 42-Nvim (testing, experimental)
+### _The testing, unstable branch of the "community-driven" Neovim configuration supercharged for 42 Students._
 
 Heavily based on [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) and [AstroNvim](https://github.com/AstroNvim/AstroNvim), this Neovim "distribution" (its just a configuration but shh) has been created with the aim of being a solid, modular, intuitive and enjoyable way to use vim/neovim. Including a built-in norminette and stdheader, it is an amazing code editor for 42 students!
 
