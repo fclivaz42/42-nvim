@@ -8,7 +8,59 @@ update() {
 	cd ~/.config/nvim
 	git remote add upstream https://github.com/fclivaz42/42-nvim.git
 	git fetch upstream
-	git merge upstream -m "Script-update 42-Nvim to latest" && git push || echo "Could not automatically merge upstream into your branch. Please cd into your nvim directory and solve the conflict."
+	git rebase --onto=upstream/main -m "Script-update 42-Nvim to latest" && git push || echo "Could not automatically merge upstream into your branch. Please cd into your nvim directory and solve the conflict."
+}
+
+rebase() {
+	cd ~/.config/nvim
+	IFS=$'\n'
+	TLINE=""
+	HASH=""
+	for line in $(git log --reverse --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)--- %an%C(reset)%C(auto)%d%C(reset)' --all); do
+		if echo $line | grep '\--- fclivaz' &>/dev/null; then
+			TLINE=$line
+		else
+			HASH="$(echo $TLINE | cut -f1 -d' ')"
+			break
+		fi
+	done
+	for line in $(git tag --list); do
+		git tag -d $line
+	done
+	echo $HASH
+	git reset --soft $HASH
+	git restore --staged *
+	git add lua/config/custom
+	git add lua/plugins/custom
+	git diff HEAD lua/config/42/init.lua > 42st.patch
+	git diff HEAD lua/config/vim_settings.lua > vst.patch
+	git stash --keep-index -m "bad stash with index"
+	git stash -m "custom"
+	git stash drop "$(git stash list | grep 'bad stash with index' | cut -f2 -d'{' | cut -f1 -d'}')"
+	git reset --hard origin/main
+	git remote add upstream https://github.com/fclivaz42/42-nvim
+	git fetch upstream &>/dev/null
+	git rebase --onto=upstream/main
+	git stash apply
+	git apply 42st.patch
+	git apply vst.patch
+	rm 42st.patch
+	rm vst.patch
+	git add .
+	git stash drop
+	git reflog expire --expire-unreachable=now --all
+	git gc --prune=now --aggressive
+	echo -e "\n---------------------------------------------------\n"
+	git status
+	echo -e "\n---------------------------------------------------\n"
+	echo "WARN: Updated to V1.5 but did not commit nor push to GitHub."
+	echo "WARN: Please verify that your configuration was properly imported and that no conflicts are present."
+	echo "WARN: If it was not, you can still check with origin/main or what is currently on GitHub."
+	echo "WARN: If you had any configuration that was *not* in the custom folders, now is a"
+	echo "WARN: great time to properly move it there since upstream changes can overwrite yours."
+	echo "WARN: Thank you for using 42-Nvim and enjoy the update!"
+	echo "WARN: (Don't forget to commit and push --force once you are done.)"
+	echo "WARN: (Updating on other devices should be as simple as 'git pull' and 'git rebase --onto=origin/main')"
 }
 
 clangd_flags() {
@@ -37,7 +89,7 @@ install() {
 		read -p "Please enter your GitHub login: " GITNAME
 		read -p "Is '$GITNAME' correct? [y/n] " ANSWER
 		case "$ANSWER" in
-			[yY][eE][sS] | [yY]) echo "Cloning..."
+			[yY][eE][sS] | [yY]) echo "Continuing."
 			;;
 			[nN][oO] | [nN]) echo "Restarting."
 			;;
@@ -46,9 +98,34 @@ install() {
 		esac
 	done
 
+	ANSWER=""
+	until [[ "$FORKED" =~ [yY][eE][sS] || "$FORKED" =~ [yY] ||"$FORKED" =~ [nN][oO] || "$FORKED" =~ [nN] ]]; do
+		read -p "Have you renamed your fork? [y/n] " FORKED
+		case "$FORKED" in
+			[yY][eE][sS] | [yY])
+			until [[ "$ANSWER" =~ [yY][eE][sS] || "$ANSWER" =~ [yY] ]]; do
+				read -p "Please enter your fork name: " GITDIR
+				read -p "Is '$GITDIR' correct? [y/n] " ANSWER
+				case "$ANSWER" in
+					[yY][eE][sS] | [yY]) echo "Cloning..."
+					;;
+					[nN][oO] | [nN]) echo "Restarting."
+					;;
+					*) echo "Unknown choice." && ANSWER="no"
+					;;
+				esac
+			done
+			;;
+			[nN][oO] | [nN]) echo "Cloning..." && GITDIR="42-nvim"
+			;;
+			*) echo "Unknown choice." && ANSWER="no"
+			;;
+		esac
+	done
+
 	[ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.bak
 	mkdir -p ~/.config/nvim
-	git clone git@github.com:$GITNAME/42-nvim.git ~/.config/nvim
+	git clone git@github.com:$GITNAME/$GITDIR.git ~/.config/nvim
 	cd ~/.config/nvim
 	git remote add upstream https://github.com/fclivaz42/42-nvim.git
 
@@ -101,6 +178,19 @@ install() {
 			rm -rf ./lua/config/42
 			;;
 			*) echo "Unknown choice." && STUD="e"
+			;;
+		esac
+	done
+
+	until [[ "$UPDATER" =~ [yY][eE][sS] || "$UPDATER" =~ [yY] || "$UPDATER" =~ [nN][oO] || "$UPDATER" =~ [nN] ]]; do
+		read -p "Would you like for 42-Nvim to notify you of its updates? [y/n] " UPDATER
+		case "$UPDATER" in
+			[yY][eE][sS] | [yY]) echo "Update notifications enabled."
+			;;
+			[nN][oO] | [nN]) echo "Update notifications disabled."
+				sed -i 's/vim.g.receiveupdates = true/vim.g.receiveupdates = false/g' ./lua/config/vim_settings.lua
+			;;
+			*) echo "Unknown choice." && UPDATER="e"
 			;;
 		esac
 	done
@@ -163,12 +253,13 @@ install() {
 	echo "All done!"
 
 	echo "Checking dependencies..."
-	gcc -v &>/dev/null || echo "WARNING: 'gcc' NOT INSTALLED!"
-	git -v &>/dev/null || echo "WARNING: 'git' NOT INSTALLED! (HOW?!)"
-	make -v &>/dev/null || echo "WARNING: 'make' NOT INSTALLED!"
-	unzip -v &>/dev/null || echo "WARNING: 'unzip' NOT INSTALLED!"
-	lazygit -v &>/dev/null || echo "WARNING: 'lazygit' NOT INSTALLED!"
-	rg -V &>/dev/null || echo "WARNING: 'ripgrep' NOT INSTALLED!"
+	gcc -v &>/dev/null || echo "WARNING: 'gcc' not installed!"
+	git -v &>/dev/null || echo "WARNING: 'git' not installed! (how??)"
+	make -v &>/dev/null || echo "WARNING: 'make' not installed!"
+	unzip -v &>/dev/null || echo "WARNING: 'unzip' not installed!"
+	lazygit -v &>/dev/null || echo "WARNING: 'lazygit' not installed!"
+	lazydocker --version &>/dev/null || echo "WARNING: 'lazydocker' not installed!"
+	rg -V &>/dev/null || echo "WARNING: 'ripgrep' not installed!"
 
 	echo "End of the installer. If some dependencies are not installed, please do so, else 42-Nvim will have weird and undefined behavior."
 	echo "Enjoy 42-Nvim! And if you got issues or an improvement, feel free to open an issue or a PR/MR on GitHub :)"
@@ -178,6 +269,9 @@ OLDPATH="$(pwd)"
 case "$1" in
 	"update")
 		update
+	;;
+	"rebase")
+		rebase
 	;;
 	"cflags")
 		clangd_flags

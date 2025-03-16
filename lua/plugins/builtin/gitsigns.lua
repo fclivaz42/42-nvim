@@ -9,17 +9,11 @@ return {
     		delete = { text = "✕" },
     		topdelete = { text = "✕" },
     		changedelete = { text = "┋" },
-		--	those here were commented out for more "in-line" signs. you are free to switch back to them.
-		--	add = { text = '+' },
-    	--	change = { text = '~' },
-    	--	delete = { text = '_' },
-    	--	topdelete = { text = '‾' },
-    	--	changedelete = { text = '~' },
     	},
     	on_attach = function(bufnr)
-    		vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-    		vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
+			vim.keymap.set('n', '<leader>gp', function() require('gitsigns').nav_hunk('prev') end, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+			vim.keymap.set('n', '<leader>gn', function() require('gitsigns').nav_hunk('next') end, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
 			vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
-    end,
+		end,
     },
 }

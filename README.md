@@ -18,8 +18,9 @@ Once that is done, you can simply start `nvim`! Lazy will then download and inst
 
 **Make sure those dependencies are installed!** The script will warn you if anything is missing, just in case.
 - `gcc`, `git`, `make`, `unzip` which _should_ be pre-installed, but it's better to double-check.
-- [lazygit](https://github.com/jesseduffield/lazygit)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [lazygit](https://github.com/jesseduffield/lazygit) (Optional, but recommended)
+- [LazyDocker](https://github.com/jesseduffield/lazydocker) (Optional)
 - ***Install a Nerd Font for extra glyphs! [Meslo](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Meslo) is a good one and the script will prompt you to download it.***
 
 If you cannot install those dependencies on 42 iMacs (eg. with [brew](https://github.com/kube/42homebrew)), you can always download the binaries and put them in your `$PATH`.
@@ -51,8 +52,10 @@ This should add `upstream`, fetch and merge automatically. Make sure to double-c
 
 ---
 ## Custom configuration? How do I install my own plugins? Themes?
-As said, 42-Nvim was made to be extended. Therefore, a `custom` subfolder exists in both the `config` and the `plugins` folders, with examples. Both folders `plugins/custom` and `config/custom` should not be changed or modified upstream (but I might place lua files from deprecated plugins if you wish to keep them) - this will be where you import and configure your plugins. There are examples that are there, so feel free to explore and import whatever you'd like!
-As a reminder, if you feel like a plugin/configuration could benefit more people, you can create a pull/merge request. I will review it, and if it does improve the "distro" in any way, I'll merge it and move it to the built-ins folder.
+As said, 42-Nvim was made to be extended. Therefore, a `custom` subfolder exists in both the `config` and the `plugins` folders, with examples. Both folders `plugins/custom` and `config/custom` *will not* be changed or modified upstream - this will be where you import and configure your plugins. Custom will also override any previous configuration, so if you wish to change the behavior of a plugin, you can override 42-Nvim's defaults there. There are examples that are there, so feel free to explore and import whatever you'd like!
+There is also an `extras` subfolder which houses **disabled** previous configurations or plugins (and plugins I have tried during testing phase but did not keep.) You are free to modify/enable any configuration you like in that as well (if you wish to roll back some changes or enable "testing" plugins), but beware that 42-Nvim might behave oddly if so.
+Any changes in `extras` and `custom` *will override* the default 42-Nvim configuration, so this is where you want to tinker if you wish to modify 42-Nvim's behavior.
+As a reminder, if you feel like a plugin/configuration could benefit more people, you can create a pull/merge request. I will review it, and if it does improve the "distro" in any way, I'll merge it and move it to the built-ins folder. If I do find some use but feel like it "breaks the spirit" or whatnot, I can always move it to `extras` which means it's just an enable away from being used.
 
 For theming, a `_themeselect.lua` file is waiting for you in the `config/custom` subfolder where you can choose which theme to use. If you want to install your own, you can always drop a `.lua` file in `plugins/themes`, as if it were an extra plugin. Once in Neovim, press `<Space>-T` to open up a theme selector!
 
@@ -61,20 +64,25 @@ Here's a little peek at the folder structure:
 ~/.config/nvim
 ┌───────────┘
 ├─ init.lua -- init file.
-├─ .clangdflags.sh -- run this :)
+├─ install.sh -- the installer/updater/clangd script for 42-Nvim. You get a local copy too!
 └─ lua
-    ├─ lazy_load.lua -- This calls the plugin manager. Delete the 42 line if you aren't from 42 (somehow).
     ├─ config
     │	├─ vim_settings.lua --  Here, you can configure your general vim settings.
     │	├─ 42 -- The init.lua file in this folder stores the user42, mail42 and norminette settings. Change them to suit your preferences.
     │	├─ builtin -- The config files for built-in plugins. Don't touch anything here as they may change! Or deal with the git conflicts :)
     │	├─ custom <<-- Here's the folder where you will load your configuration! The init.lua file and _themeselect.lua will have examples.
+    │	├─ extras <<-- Here's a folder where old configurations are stored, in case you wish to personally roll back.
+    │	├─ vim_settings.lua <<-- This file hosts most of the basic vim behavior config. You can also dis or enable the 42-Nvim updater.
+    │	├─ lsp_servers.lua <<-- This file describes which LSP's you want to install/configure with or without settings.
+    │	├─ ts_languages.lua <<-- This file tells Tree-Sitter which languages should have syntax highlighting compiled/enabled.
     │	└─ init.lua -- Don't touch this, it's used to load all the config.
     └─ plugins
 	├─ 42 -- The init.lua file in this folder loads the 42Stdheader (Lausanne, by default. Change this if you are not from Lausanne!)
 	├─ builtin -- This folder contains all the built-in plugins that make 42-Nvim what it is. Don't touch as it might get modified.
 	├─ custom <<-- This is where you want to add your lua files to add custom plugins. An example file lives there.
-	└─ themes -- This folder contains all the current themes. You may add your own or delete those you don't use.
+	├─ extras <<-- This folder stores plugins that have either been used in the past and kept around OR plugins I have used during testing but kept disabled.
+	├─ themes -- This folder contains all the current themes. You may add your own or delete those you don't use.
+	└─ init.lua -- Do not touch this either, it's used to load all of the plugins.
 ```
 
 ---
@@ -134,14 +142,14 @@ There are many more shortcuts, as shown by `which-key`, but here are a few of th
 | Keybind | Shortcut |
 | :------ | :------- |
 | `<CTRL>-W` | leader key to move around. |
-| `<CTRL>-W-<Left>` | Move focus to the left. |
-| `<CTRL>-W-H` | Move focus to the left. |
-| `<CTRL>-W-<Right>` | Move focus to the right. |
-| `<CTRL>-W-L` | Move focus to the right. |
 | `<CTRL>-W-<Up>` | Move focus above. |
-| `<CTRL>-W-K` | Move focus above. |
+| `<CTRL>-W-<Left>` | Move focus to the left. |
 | `<CTRL>-W-<Down>` | Move focus below. |
-| `<CTRL>-W-J` | Move focus below. |
+| `<CTRL>-W-<Right>` | Move focus to the right. |
+| `<CTRL>-I` | Move focus above. |
+| `<CTRL>-J` | Move focus to the left. |
+| `<CTRL>-K` | Move focus below. |
+| `<CTRL>-L` | Move focus to the right. |
 | `<CTRL>-W-V` | Vertical split. |
 | `<CTRL>-W-S` | Horizontal split. |
 | `<CTRL>-W-Q` | Close active window. |
@@ -163,6 +171,7 @@ There are many more shortcuts, as shown by `which-key`, but here are a few of th
 | `<Space>-S-H` | Telescope into searching help/documentation. |
 | `<Space>-G-F` | Telescope search Git files. |
 | `<Space>-L-G` | LazyGit interface. |
+| `<Space>-L-D` | LazyDocker interface. |
 | `<Space>-T` | Telescope into Themes. |
 
 </details>
@@ -176,6 +185,9 @@ There are many more shortcuts, as shown by `which-key`, but here are a few of th
 
 | Keybind | Shortcut |
 | :------ | :------- |
+| `;-[` | Soft wrap mode (words wrap around) |
+| `;-]` | Hard wrap mode (words do not wrap at all) |
+| `;-\` | Switch line wrapping mode. |
 | `g-c-c` | Toggle selection as line comment. |
 | `g-b-c` | Toggle selection as block comment. |
 | `g-c-A` | Insert comment at end of line. |
@@ -213,42 +225,43 @@ As I said, this would not have been possible without these two goats:
 
 - [42 Header](https://github.com/42Paris/42header)
 - [Norminette42](https://github.com/hardyrafael17/norminette42.nvim)
-- [Lazy.nvim](https://github.com/folke/lazy.nvim)
-- [vim-obsession](https://github.com/tpope/vim-obsession)
-- [vim-fugitive](https://github.com/tpope/vim-fugitive)
-- [vim-rhubarb](https://github.com/tpope/vim-obsession)
-- [vim-surround](https://github.com/tpope/vim-surround)
-- [dashboard-nvim](https://github.com/nvimdev/dashboard-nvim)
-- [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
-- [neodev.nvim](https://github.com/folke/neodev.nvim)
-- [nvim-window-picker](https://github.com/s1n7ax/nvim-window-picker)
-- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
-- [nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua)
-- [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
-- [image.nvim](https://github.com/3rd/image.nvim)
-- [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
-- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
-- [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim)
 - [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
-- [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
-- [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
-- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
 - [Comment.nvim](https://github.com/numToStr/Comment.nvim)
+- [dashboard-nvim](https://github.com/nvimdev/dashboard-nvim)
+- [fidget.nvim](https;//github.com/j-hui/fidget.nvim)
+- [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+- [image.nvim](https://github.com/3rd/image.nvim)
 - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
+- [lazydocker.nvim](https://github.com/crnvl96/lazydocker.nvim)
+- [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim)
+- [Lazy.nvim](https://github.com/folke/lazy.nvim)
+- [lualine.nvim](https://github.com/folke/nvim-lualine/lualine.nvim)
+- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+- [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
+- [mason.nvim](https://github.com/williamboman/mason.nvim)
+- [neodev.nvim](https://github.com/folke/neodev.nvim)
+- [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
+- [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
+- [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nvim-lsp-notify](https://github.com/mrded/nvim-lsp-notify)
 - [nvim-notify](https://github.com/rcarriga/nvim-notify)
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-- [mason.nvim](https://github.com/williamboman/mason.nvim)
-- [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
-- [lualine.nvim](https://github.com/folke/nvim-lualine/lualine.nvim)
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-- [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
-- [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
+- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+- [nvim-window-picker](https://github.com/s1n7ax/nvim-window-picker)
+- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+- [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
+- [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
+- [vim-fugitive](https://github.com/tpope/vim-fugitive)
+- [vim-obsession](https://github.com/tpope/vim-obsession)
+- [vim-surround](https://github.com/tpope/vim-surround)
 - [which-key.nvim](https://github.com/folke/which-key.nvim)
 - [wrapping.nvim](https://github.com/andrewferrier/wrapping.nvim)
 

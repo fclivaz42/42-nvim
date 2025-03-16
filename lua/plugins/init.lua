@@ -1,5 +1,6 @@
 --[[ Lazy config file. ]] --
 
+---@diagnostic disable: missing-fields
 require('lazy').setup({
 	-- First, some plugins that don't require any configuration
 	'tpope/vim-obsession',
@@ -8,7 +9,6 @@ require('lazy').setup({
 	'nvim-tree/nvim-web-devicons',
 	{
 		'brenoprata10/nvim-highlight-colors',
-	--	'NvChad/nvim-colorizer.lua',
 		config = true
 	},
 	{
@@ -17,8 +17,6 @@ require('lazy').setup({
 		config = true
 	},
 
-	-- Deprecated nvim-tree, but I left it just in case.
-	-- 'nvim-tree/nvim-tree.lua',
 
 	-- Then load every 42 plugin...
 	-- NOTE: If you are not from 42 or don't know what it is,
@@ -27,6 +25,9 @@ require('lazy').setup({
 
 	-- Then load every plugin that came bundled...
 	{	import = 'plugins.builtin'	},
+
+	-- Then load every plugin that was uncommented in extras...
+	{	import = 'plugins.extras'	},
 
 	-- Then load every custom plugin you added...
 	{	import = 'plugins.custom'	},

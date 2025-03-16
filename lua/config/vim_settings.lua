@@ -3,6 +3,13 @@
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- Would you like to be notified whenever 42-Nvim has an update available?
+-- NOTE: 42-Nvim will never update without your explicit order!
+vim.g.receiveupdates = true
+
+-- Would you like 42-Nvim to automatically open binray files with system apps?
+vim.g.smartopen = true
+
 -- Set map leaders before anything else.
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -113,10 +120,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<C-j>', '<C-w><Left>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><Right>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-k>', '<C-w><Down>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-i>', '<C-w><Up>', { desc = 'Move focus to the upper window' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

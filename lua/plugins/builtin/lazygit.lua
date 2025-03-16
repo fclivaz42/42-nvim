@@ -25,6 +25,6 @@ return {
 	--
 	-- use <space-l-g> to bring it out, and 'q' to quit it.
 	keys = {
-		{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+		{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "[L]azy[G]it" }
 	}
 }

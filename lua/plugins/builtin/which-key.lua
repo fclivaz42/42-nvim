@@ -22,7 +22,8 @@ return {
 			{ "<leader>h", group = 'Git [H]unk' },
 			{ "<leader>h_", hidden = true },
 			{ "<leader>h", group = "Git [H]unk", mode = "v" },
-			{ "<leader>l", group = '[L]azy [G]it' },
+			{ "<leader>l", group = '[L]azy' },
+			{ ";", group = 'Wrapping' },
 		}
 	end,
 }
