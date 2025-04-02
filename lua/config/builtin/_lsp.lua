@@ -82,3 +82,31 @@ mason_lspconfig.setup_handlers {
 		}
 	end
 }
+
+-- Turn on diagnostic highlighting.
+vim.diagnostic.config {
+	severity_sort = true,
+	float = { border = 'rounded', source = 'if_many' },
+	underline = {
+		severity = {
+			min = "WARN",
+			max = "ERROR"
+		}
+	},
+	virtual_text = {
+		source = 'if_many',
+		spacing = 2,
+		prefix = function (diagnostic)
+			if vim.g.have_nerd_font == false then
+				return '▸'
+			end
+			local diagnostic_message = {
+				[vim.diagnostic.severity.ERROR] = '󰅚',
+				[vim.diagnostic.severity.WARN] = '󰀪',
+				[vim.diagnostic.severity.INFO] = '󰋽',
+				[vim.diagnostic.severity.HINT] = '󰌶',
+			}
+			return diagnostic_message[diagnostic.severity]
+		end
+	},
+}

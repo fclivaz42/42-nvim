@@ -169,6 +169,7 @@ There are many more shortcuts, as shown by `which-key`, but here are a few of th
 | `<Space>-S-G` | Live Fuzzy Grep in current working directory. (my favourite!) |
 | `<Space>-S-F` | Telescope into searching files. |
 | `<Space>-S-H` | Telescope into searching help/documentation. |
+| `<Space>-S-K` | Telescope into searching keymaps/shortcuts. |
 | `<Space>-G-F` | Telescope search Git files. |
 | `<Space>-L-G` | LazyGit interface. |
 | `<Space>-L-D` | LazyDocker interface. |
