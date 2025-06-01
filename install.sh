@@ -8,7 +8,7 @@ update() {
 	cd ~/.config/nvim
 	git remote add upstream https://github.com/fclivaz42/42-nvim.git
 	git fetch upstream
-	git rebase --onto=upstream/main -m "Script-update 42-Nvim to latest" && git push || echo "Could not automatically merge upstream into your branch. Please cd into your nvim directory and solve the conflict."
+	git merge upstream/main -m "Script-update 42-Nvim to latest" && git push || echo "Could not automatically merge upstream into your branch. Please cd into your nvim directory and solve the conflict."
 }
 
 rebase() {

@@ -1,4 +1,4 @@
---[[ Custom plugin config loader. ]]--
+-- [[ Custom plugin config loader. ]] --
 
 -- NOTE: Those 'custom' configurations will *never* be changed upstream. you are safe to change them at will!
 

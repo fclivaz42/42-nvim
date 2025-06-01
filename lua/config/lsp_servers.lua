@@ -16,21 +16,23 @@ return {
 		filetypes = {
 			'c', 'h', 'm',
 			'mm', 'cc',
-			'cpp', 'cxx','c++','hpp', 'hxx', 'h++', 'tpp', 'ipp'
+			'cpp', 'cxx', 'c++', 'hpp', 'hxx', 'h++', 'tpp', 'ipp'
 		},
 		cmd = {
-				'clangd',
-				'--header-insertion=never',
-				'-j=4',
-				'--background-index',
-				'--background-index-priority=low'
+			'clangd',
+			'--header-insertion=never',
+			'-j=4',
+			'--background-index',
+			'--background-index-priority=low'
 		}
 	},
 	lua_ls = {
-		Lua = {
-			workspace = { checkThirdParty = false },
-			telemetry = { enable = false },
-		},
+		settings = {
+			Lua = {
+				workspace = { checkThirdParty = true },
+				telemetry = { enable = false },
+			},
+		}
 	},
 
 	-- NOTE: Add your own down here!
@@ -41,10 +43,12 @@ return {
 	-- Python LSP with settings:
 
 	-- pylsp = {
-	-- 	pylsp = {
-	-- 		plugins = {
-	-- 			pycodestyle = {
-	-- 				enabled = false
+	-- 	settings = {
+	-- 		pylsp = {
+	-- 			plugins = {
+	-- 				pycodestyle = {
+	-- 					enabled = false
+	-- 				}
 	-- 			}
 	-- 		}
 	-- 	}

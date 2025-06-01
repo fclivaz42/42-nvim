@@ -41,18 +41,18 @@ local on_attach = function(client, bufnr)
 	-- WARN: this little bit here is *only* here to support nvim-navic if you decide to enable it.
 	-- It might very well disappear one day!
 	local status, navic = pcall(require, "nvim-navic")
-		if status then
-			if client.server_capabilities.documentSymbolProvider then
-				navic.attach(client, bufnr)
-			end
-			vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+	if status then
+		if client.server_capabilities.documentSymbolProvider then
+			navic.attach(client, bufnr)
 		end
+		vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+	end
 end
 
 -- Load the user-specified LSP servers.
 local servers = require("config.lsp_servers")
 
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.tpp",
 	callback = function()
 		vim.bo.filetype = "cpp"
@@ -68,20 +68,18 @@ local mason_lspconfig = require 'mason-lspconfig'
 
 -- Shut up we are loading the servers. Dont worry.
 mason_lspconfig.setup {
-	ensure_installed = vim.tbl_keys(servers),
+	ensure_installed = vim.tbl_keys(servers)
 }
 
-mason_lspconfig.setup_handlers {
-	function(server_name)
-		require('lspconfig')[server_name].setup {
-			capabilities = capabilities,
-			on_attach = on_attach,
-			settings = servers[server_name],
-			filetypes = (servers[server_name] or {}).filetypes,
-			cmd = (servers[server_name] or {}).cmd
-		}
-	end
-}
+for server_name, server in pairs(servers) do
+	vim.lsp.config(server_name, {
+		capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {}),
+		on_attach = on_attach,
+		settings = (server or {}).settings,
+		filetypes = (server or {}).filetypes,
+		cmd = (server or {}).cmd
+	})
+end
 
 -- Turn on diagnostic highlighting.
 vim.diagnostic.config {
@@ -96,15 +94,15 @@ vim.diagnostic.config {
 	virtual_text = {
 		source = 'if_many',
 		spacing = 2,
-		prefix = function (diagnostic)
+		prefix = function(diagnostic)
 			if vim.g.have_nerd_font == false then
 				return '▸'
 			end
 			local diagnostic_message = {
-				[vim.diagnostic.severity.ERROR] = '󰅚',
-				[vim.diagnostic.severity.WARN] = '󰀪',
-				[vim.diagnostic.severity.INFO] = '󰋽',
-				[vim.diagnostic.severity.HINT] = '󰌶',
+				[vim.diagnostic.severity.ERROR] = '󰅚 ',
+				[vim.diagnostic.severity.WARN] = '󰀪 ',
+				[vim.diagnostic.severity.INFO] = '󰋽 ',
+				[vim.diagnostic.severity.HINT] = '󰌶 ',
 			}
 			return diagnostic_message[diagnostic.severity]
 		end
