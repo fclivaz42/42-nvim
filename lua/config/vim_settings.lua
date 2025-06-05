@@ -5,7 +5,7 @@
 
 -- Would you like to be notified whenever 42-Nvim has an update available?
 -- NOTE: 42-Nvim will never update without your explicit order!
-vim.g.receiveupdates = true
+vim.g.receiveupdates = false
 
 -- Would you like 42-Nvim to automatically open binray files with system apps?
 vim.g.smartopen = true
@@ -66,7 +66,7 @@ vim.o.termguicolors = true
 
 -- Configure how new splits should be opened
 vim.opt.splitright = false
-vim.opt.splitbelow = true
+vim.opt.splitbelow = false
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
