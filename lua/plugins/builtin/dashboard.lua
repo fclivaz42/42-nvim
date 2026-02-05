@@ -31,10 +31,12 @@ local function fetchUpstream()
 		vim.fn.system("git -C " .. stdpath .. " remote add upstream https://github.com/fclivaz42/42-nvim.git")
 	end
 	vim.fn.system("git -C " .. stdpath .. " fetch upstream")
-	local ret = vim.fn.system("git -C " .. stdpath .. " merge upstream/main -m 'Dashboard Release Update'")
+	local ret = vim.fn.system("git -C " .. stdpath .. " rebase upstream/main")
 	if (vim.v.shell_error ~= 0) then
 		vim.notify("Error merging from upstsream.\nPlease manually review it.", vim.log.levels.WARN,
 			{ title = "42-Nvim", timeout = 3000 })
+		vim.notify("DO NOT CLOSE YOUR NEOVIM.\nIt might currently broken.\nYou might want to fix the conflicts from this opened instance and restart only once you are done.", vim.log.levels.ERROR,
+			{ title = "42-Nvim", timeout = 10000 })
 		vim.notify("Trace: " .. ret, vim.log.levels.WARN, { title = "42-Nvim", timeout = 3000 })
 	else
 		vim.notify("Config updated!\n Don't forget to push and restart :)", vim.log.levels.INFO, { title = "42-Nvim" })
@@ -97,7 +99,7 @@ return {
 				},
 				footer = {
 					'',
-					'42-Nvim V1.5.2',
+					'42-Nvim V1.6',
 					'[ ] https://github.com/fclivaz42/42-nvim',
 					'Have a nice day :)'
 				},

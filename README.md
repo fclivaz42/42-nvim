@@ -153,6 +153,10 @@ There are many more shortcuts, as shown by `which-key`, but here are a few of th
 | `<CTRL>-W-V` | Vertical split. |
 | `<CTRL>-W-S` | Horizontal split. |
 | `<CTRL>-W-Q` | Close active window. |
+| `<CTRL>-Up` | Increase window height. |
+| `<CTRL>-Down` | Decrease window height. |
+| `<CTRL>-Right` | Increase window width. |
+| `<CTRL>-Left` | Decrease window width. |
 
 </details>
 
@@ -256,6 +260,7 @@ As I said, this would not have been possible without these two goats:
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - [nvim-window-picker](https://github.com/s1n7ax/nvim-window-picker)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim)
 - [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 - [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)

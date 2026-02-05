@@ -6,9 +6,11 @@
 update() {
 	echo "Updating 42-Nvim..."
 	cd ~/.config/nvim
-	git remote add upstream https://github.com/fclivaz42/42-nvim.git
+	if ! git remote -v  grep 'upstream'; then
+		git remote add upstream https://github.com/fclivaz42/42-nvim.git
+	fi
 	git fetch upstream
-	git merge upstream/main -m "Script-update 42-Nvim to latest" && git push || echo "Could not automatically merge upstream into your branch. Please cd into your nvim directory and solve the conflict."
+	git rebase upstream/main && git push || echo "Could not automatically merge upstream into your branch. Please cd into your nvim directory and solve the conflict."
 }
 
 rebase() {
@@ -253,13 +255,14 @@ install() {
 	echo "All done!"
 
 	echo "Checking dependencies..."
-	gcc -v &>/dev/null || echo "WARNING: 'gcc' not installed!"
-	git -v &>/dev/null || echo "WARNING: 'git' not installed! (how??)"
-	make -v &>/dev/null || echo "WARNING: 'make' not installed!"
-	unzip -v &>/dev/null || echo "WARNING: 'unzip' not installed!"
-	lazygit -v &>/dev/null || echo "WARNING: 'lazygit' not installed!"
-	lazydocker --version &>/dev/null || echo "WARNING: 'lazydocker' not installed!"
-	rg -V &>/dev/null || echo "WARNING: 'ripgrep' not installed!"
+	gcc -v &>/dev/null || echo "WARNING: 'gcc' not installed! tree-sitter will not work!"
+	git -v &>/dev/null || echo "WARNING: 'git' not installed! (how??) Litterally nothing is going to work!"
+	make -v &>/dev/null || echo "WARNING: 'make' not installed! LSP's and tree-sitter will not work!"
+	unzip -v &>/dev/null || echo "WARNING: 'unzip' not installed! Plugin installation will not work!"
+	lazygit -v &>/dev/null || echo "WARNING: 'lazygit' not installed! Its plugin will not work"
+	lazydocker --version &>/dev/null || echo "WARNING: 'lazydocker' not installed! Its plugin will not work."
+	rg -V &>/dev/null || echo "WARNING: 'ripgrep' not installed! Telescope search will not properly work."
+	tree-sitter -V &>/dev/null || echo "WARNING: 'tree-sitter-cli' not installed! Syntax highlighting/tree-sitter will not work."
 
 	echo "End of the installer. If some dependencies are not installed, please do so, else 42-Nvim will have weird and undefined behavior."
 	echo "Enjoy 42-Nvim! And if you got issues or an improvement, feel free to open an issue or a PR/MR on GitHub :)"

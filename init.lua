@@ -49,22 +49,29 @@ if not string.find(vim.fn.system("git -C " .. stdpath .. " remote -v"), "upstrea
 end
 
 if vim.g.receiveupdates == true then
-	vim.loop.spawn('git', {
-			args = { '-C', stdpath, 'fetch', 'upstream' },
-			stdio = { nil, nil, nil }
-		},
-		vim.schedule_wrap(function(code)
-			if code == 0 then
-				local mainc = vim.fn.system('git -C ' .. stdpath .. ' rev-list --count HEAD..upstream/main')
-
-				if mainc ~= '0\n' then
-					vim.notify("Update available!", vim.log.levels.WARN, { title = "42-Nvim" })
+	local job_id = vim.fn.jobstart(
+		{'git', '-C', stdpath, 'fetch', 'upstream' },
+		{
+			stdout_buffered = true,
+			stderr_buffered = true,
+			on_stderr = function(_, data, _)
+				if data and data[1] ~= '' then
+					vim.notify("Fetched from upstream: " .. table.concat(data, "\n"))
 				end
-			else
-				vim.notify("Could not fetch upstream for updates.", vim.log.levels.WARN, { title = "42-Nvim" })
+			end,
+			on_exit = function(_, exit_code, _)
+				if exit_code == 0 then
+					local mainc = vim.fn.system('git -C ' .. stdpath .. ' rev-list --count HEAD..upstream/main')
+
+					if mainc ~= '0\n' then
+						vim.notify("Update available!", vim.log.levels.WARN, { title = "42-Nvim" })
+					end
+				else
+					vim.notify("Could not fetch upstream for updates.", vim.log.levels.WARN, { title = "42-Nvim" })
+				end
 			end
-		end
-		))
+		}
+	)
 end
 
 if (vim.g.user42 ~= "SET YOUR USER UP") then

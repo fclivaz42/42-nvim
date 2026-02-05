@@ -7,7 +7,14 @@ return {
 		-- Automatically install LSPs to stdpath for neovim
 		{
 			'mason-org/mason.nvim',
-			config = true
+			config = true,
+			opts = {
+				-- This allows you to have Roslyn (the C# LSP). You can enable it in extras/roslyn.lua
+				registries = {
+					"github:mason-org/mason-registry",
+					"github:Crashdummyy/mason-registry",
+				}
+			}
 		},
 		'mason-org/mason-lspconfig.nvim',
 		{

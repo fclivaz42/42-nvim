@@ -1,12 +1,12 @@
---[[ NeoTree configuration ]]--
+--[[ NeoTree configuration ]] --
 
 -- Function to read the dashboard cache
 local function readDache()
-    local cachedir = vim.fn.stdpath('cache') .. "/" .. 'dashboard'
+	local cachedir = vim.fn.stdpath('cache') .. "/" .. 'dashboard'
 	if vim.fn.isdirectory(cachedir) then
 		vim.fn.mkdir(cachedir, 'p')
 	end
-    local cache = cachedir .. '/' .. 'cache'
+	local cache = cachedir .. '/' .. 'cache'
 	local fd = vim.loop.fs_open(cache, "r", tonumber('644', 8))
 	if fd == nil then
 		local fd2 = assert(vim.loop.fs_open(cache, "w", tonumber('644', 8)))
@@ -15,7 +15,7 @@ local function readDache()
 	end
 	local stat = assert(vim.loop.fs_fstat(fd))
 	local contents = vim.loop.fs_read(fd, stat.size, 0)
-        ---@diagnostic disable-next-line: param-type-mismatch
+	---@diagnostic disable-next-line: param-type-mismatch
 	local dump = assert(loadstring(contents))
 	vim.loop.fs_close(fd)
 	return dump()
@@ -23,11 +23,11 @@ end
 
 -- Function to write to the dashboard cache
 local function writeToDache(content)
-    local cachedir = vim.fn.stdpath('cache') .. "/" .. 'dashboard'
+	local cachedir = vim.fn.stdpath('cache') .. "/" .. 'dashboard'
 	if vim.fn.isdirectory(cachedir) then
 		vim.fn.mkdir(cachedir, 'p')
 	end
-    local cache = cachedir .. '/' .. 'cache'
+	local cache = cachedir .. '/' .. 'cache'
 	local fd = assert(vim.loop.fs_open(cache, "w", tonumber('644', 8)))
 	local dump = 'return ' .. vim.inspect(content)
 	vim.loop.fs_write(fd, dump, 0)
@@ -50,13 +50,13 @@ local function smarthandler(args)
 		openfunc = "open"
 	end
 	vim.loop.spawn(openfunc, { args = { args.path } },
-	function(code, _)
-		if code ~= 0 then
-			vim.notify("Error opening " .. args.path)
-		else
-			vim.notify("Externally opened " .. args.path)
-		end
-	end)
+		function(code, _)
+			if code ~= 0 then
+				vim.notify("Error opening " .. args.path)
+			else
+				vim.notify("Externally opened " .. args.path)
+			end
+		end)
 	return { handled = true }
 end
 
@@ -131,23 +131,23 @@ require("neo-tree").setup({
 			-- ["<cr>"] = "open_drop",
 			-- ["t"] = "open_tab_drop",
 			["w"] = "open",
-			--["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
-		--	["C"] = "close_node",
+			-- ["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
+			-- ["C"] = "close_node",
 			-- ['C'] = 'close_all_subnodes',
 			["z"] = "close_all_nodes",
-			--["Z"] = "expand_all_nodes",
+			-- ["Z"] = "expand_all_nodes",
 			["a"] = {
-			  "add",
-			  -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
-			  -- some commands may take optional config options, see `:h neo-tree-mappings` for details
-			  config = {
-			    show_path = "none" -- "none", "relative", "absolute"
-			  }
+				"add",
+				-- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
+				-- some commands may take optional config options, see `:h neo-tree-mappings` for details
+				config = {
+					show_path = "none" -- "none", "relative", "absolute"
+				}
 			},
 			["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
 			["d"] = "delete",
 			["r"] = "rename",
-		--	["y"] = "copy_to_clipboard",
+			-- ["y"] = "copy_to_clipboard",
 			["C"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
 			["x"] = "cut_to_clipboard",
 			["p"] = "paste_from_clipboard",
@@ -178,7 +178,7 @@ require("neo-tree").setup({
 				if content == nil then
 					content = {}
 				end
-				for _,i in pairs(content) do
+				for _, i in pairs(content) do
 					if i == path then
 						table.remove(content, x)
 						writeToDache(content)
@@ -219,18 +219,13 @@ require("neo-tree").setup({
 			},
 		},
 		follow_current_file = {
-			enabled = false, -- This will find and focus the file in the active buffer every time
-							-- the current file is changed while the tree is open.
+			enabled = false,     -- This will find and focus the file in the active buffer every time
+			-- the current file is changed while the tree is open.
 			leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 		},
 		group_empty_dirs = false, -- when true, empty folders will be grouped together
-		hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
-													-- in whatever position is specified in window.position
-								  -- "open_current",  -- netrw disabled, opening a directory opens within the
-													-- window like netrw would, regardless of window.position
-								  -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-		use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
-											-- instead of relying on nvim autocmd events.
+		hijack_netrw_behavior = "open_default",
+		use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes instead of relying on nvim autocmd events.
 		window = {
 			mappings = {
 				["<C-K>"] = "addToDash",
@@ -245,7 +240,7 @@ require("neo-tree").setup({
 				["<c-J>"] = "clear_filter",
 				["[g"] = "prev_git_modified",
 				["]g"] = "next_git_modified",
-				["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+				["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
 				["oc"] = { "order_by_created", nowait = false },
 				["od"] = { "order_by_diagnostics", nowait = false },
 				["og"] = { "order_by_git_status", nowait = false },
@@ -277,7 +272,7 @@ require("neo-tree").setup({
 				["bd"] = "buffer_delete",
 				["<bs>"] = "navigate_up",
 				["."] = "set_root",
-				["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+				["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
 				["oc"] = { "order_by_created", nowait = false },
 				["od"] = { "order_by_diagnostics", nowait = false },
 				["om"] = { "order_by_modified", nowait = false },
@@ -298,7 +293,7 @@ require("neo-tree").setup({
 				["gc"] = "git_commit",
 				["gp"] = "git_push",
 				["gg"] = "git_commit_and_push",
-				["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+				["o"]  = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
 				["oc"] = { "order_by_created", nowait = false },
 				["od"] = { "order_by_diagnostics", nowait = false },
 				["om"] = { "order_by_modified", nowait = false },
@@ -309,22 +304,23 @@ require("neo-tree").setup({
 		}
 	},
 	document_symbols = {
-		follow_cursor = false,
+		follow_cursor = true,
 		client_filters = "first",
 		renderers = {
 			root = {
-				{"indent"},
-				{"icon", default="C" },
-				{"name", zindex = 10},
+				{ "indent" },
+				{ "icon",  default = "C" },
+				{ "name",  zindex = 10 },
 			},
 			symbol = {
-				{"indent", with_expanders = true},
-				{"kind_icon", default="?" },
-				{"container",
-				content = {
-				  {"name", zindex = 10},
-				  {"kind_name", zindex = 20, align = "right"},
-				  }
+				{ "indent",    with_expanders = true },
+				{ "kind_icon", default = "?" },
+				{
+					"container",
+					content = {
+						{ "name",      zindex = 10 },
+						{ "kind_name", zindex = 20, align = "right" },
+					}
 				}
 			},
 		},
@@ -332,8 +328,11 @@ require("neo-tree").setup({
 			position = "right",
 			mappings = {
 				["<cr>"] = "jump_to_symbol",
-				["o"] = "jump_to_symbol",
-				["A"] = "noop", -- also accepts the config.show_path and config.insert_as options.
+				["o"] = "toggle_node",
+				["P"] = "preview",
+				["s"] = "toggle_node",
+				["<C-r>"] = "noop",
+				["A"] = "noop",
 				["d"] = "noop",
 				["i"] = "noop",
 				["y"] = "noop",
