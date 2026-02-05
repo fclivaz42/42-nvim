@@ -35,7 +35,9 @@ local function fetchUpstream()
 	if (vim.v.shell_error ~= 0) then
 		vim.notify("Error merging from upstsream.\nPlease manually review it.", vim.log.levels.WARN,
 			{ title = "42-Nvim", timeout = 3000 })
-		vim.notify("DO NOT CLOSE YOUR NEOVIM.\nIt might currently broken.\nYou might want to fix the conflicts from this opened instance and restart only once you are done.", vim.log.levels.ERROR,
+		vim.notify(
+			"DO NOT CLOSE YOUR NEOVIM.\nIt might currently broken.\nYou might want to fix the conflicts from this opened instance and restart only once you are done.",
+			vim.log.levels.ERROR,
 			{ title = "42-Nvim", timeout = 10000 })
 		vim.notify("Trace: " .. ret, vim.log.levels.WARN, { title = "42-Nvim", timeout = 3000 })
 	else
@@ -99,7 +101,7 @@ return {
 				},
 				footer = {
 					'',
-					'42-Nvim V1.7-B',
+					'42-Nvim V1.7-P',
 					'[ ] https://github.com/fclivaz42/42-nvim',
 					'Have a nice day :)'
 				},

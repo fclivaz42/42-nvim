@@ -42,22 +42,22 @@ return {
 
 	-- Python LSP with settings:
 
-	-- pylsp = {
-	-- 	settings = {
-	-- 		pylsp = {
-	-- 			plugins = {
-	-- 				pycodestyle = {
-	-- 					enabled = false
-	-- 				}
-	-- 			}
-	-- 		}
-	-- 	}
-	-- },
+	pylsp = {
+		settings = {
+			pylsp = {
+				plugins = {
+					pycodestyle = {
+						enabled = false
+					}
+				}
+			}
+		}
+	},
 
 	--	-- WARN: rust-analyzer will *only* work in a directory created by 'cargo init'.
 	--	--
 	-- rust_analyzer = {},
 	-- codelldb = {},
-	-- html = { filetypes = { 'html', 'twig', 'hbs'} },
+	-- html = { filetypes = { 'html', 'twig', 'hbs' } },
 	-- ts_ls = {},
 }

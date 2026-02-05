@@ -11,6 +11,7 @@ return {
 	'bash',
 	'c',
 	'cpp',
+	"c_sharp",
 	'css',
 	'dockerfile',
 	'html',

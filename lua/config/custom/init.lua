@@ -10,3 +10,4 @@ local custom = ... .. "."
 
 -- As an example, we will set your default theme here:
 require(custom .. "_themeselect")
+vim.g.android_sdk_path = "/home/fclivaz/Android/Sdk"
