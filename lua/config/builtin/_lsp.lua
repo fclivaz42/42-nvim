@@ -52,10 +52,14 @@ end
 -- Load the user-specified LSP servers.
 local servers = require("config.lsp_servers")
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = "*.tpp",
-	callback = function()
-		vim.bo.filetype = "cpp"
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "hpp", "sh" },
+	callback = function(event)
+		if event.file:match("%.tpp$") then
+			vim.bo.filetype = "cpp"
+		elseif vim.bo.filetype == "sh" then
+			vim.bo.filetype = "bash"
+		end
 	end
 })
 
