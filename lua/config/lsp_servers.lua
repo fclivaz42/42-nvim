@@ -56,7 +56,17 @@ return {
 
 	--	-- WARN: rust-analyzer will *only* work in a directory created by 'cargo init'.
 	--	--
-	-- rust_analyzer = {},
+	rust_analyzer = {
+		settings = {
+			cargo = {
+				allFeatures = true,
+				loadOutDirsFromCheck = true,
+			},
+			procMacro = {
+				enable = true,
+			},
+		}
+	},
 	-- codelldb = {},
 	-- html = { filetypes = { 'html', 'twig', 'hbs' } },
 	-- ts_ls = {},

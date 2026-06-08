@@ -1,5 +1,14 @@
 -- [[ Configure LSP ]]--
 --	This function gets run when an LSP connects to a particular buffer.
+--
+
+-- local _signature_help = vim.lsp.buf.signature_help
+-- vim.lsp.buf.signature_help = function(opts)
+-- 	opts = opts or {}
+-- 	opts.border = opts.border or 'rounded'
+-- 	return _signature_help(opts)
+-- end
+
 local on_attach = function(client, bufnr)
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
@@ -18,6 +27,7 @@ local on_attach = function(client, bufnr)
 	nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 	nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
+	nmap('K', function() vim.lsp.buf.hover({ border = "rounded" }) end, 'Show LSP Hover')
 	nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 	nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 	nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
@@ -64,12 +74,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.tbl_deep_extend("force",
-	vim.lsp.protocol.make_client_capabilities(),
-	require('cmp_nvim_lsp').default_capabilities()
-)
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
 
 -- Shut up we are loading the servers. Dont worry.
@@ -114,3 +120,15 @@ vim.diagnostic.config {
 		end
 	},
 }
+
+local function set_lsp_border()
+	local hl = vim.api.nvim_get_hl(0, { name = 'FloatBorder', link = false })
+	if not hl.fg then
+		hl = vim.api.nvim_get_hl(0, { name = 'Comment', link = false })
+	end
+	vim.api.nvim_set_hl(0, 'LspBorder', { fg = hl.fg, bg = 'NONE', ctermbg = 'NONE', force = true })
+end
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+	callback = set_lsp_border,
+})
