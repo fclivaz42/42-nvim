@@ -232,18 +232,18 @@ install() {
 			mkdir -p ~/.local/share/fonts
 			cd ~/.local/share/fonts
 			LINK="https://github.com/ryanoasis/nerd-fonts/raw/refs/heads/master/patched-fonts/Meslo/M-DZ"
-			curl -O $LINK/Regular/MesloLGMDZNerdFont-Regular.ttf
-			curl -O $LINK/Regular/MesloLGMDZNerdFontMono-Regular.ttf
-			curl -O $LINK/Regular/MesloLGMDZNerdFontPropo-Regular.ttf
-			curl -O $LINK/Bold-Italic/MesloLGMDZNerdFont-BoldItalic.ttf
-			curl -O $LINK/Bold-Italic/MesloLGMDZNerdFontMono-BoldItalic.ttf
-			curl -O $LINK/Bold-Italic/MesloLGMDZNerdFontPropo-BoldItalic.ttf
-			curl -O $LINK/Bold/MesloLGMDZNerdFont-Bold.ttf
-			curl -O $LINK/Bold/MesloLGMDZNerdFontMono-Bold.ttf
-			curl -O $LINK/Bold/MesloLGMDZNerdFontPropo-Bold.ttf
-			curl -O $LINK/Italic/MesloLGMDZNerdFont-Italic.ttf
-			curl -O $LINK/Italic/MesloLGMDZNerdFontMono-Italic.ttf
-			curl -O $LINK/Italic/MesloLGMDZNerdFontPropo-Italic.ttf
+			curl -OL $LINK/Regular/MesloLGMDZNerdFont-Regular.ttf
+			curl -OL $LINK/Regular/MesloLGMDZNerdFontMono-Regular.ttf
+			curl -OL $LINK/Regular/MesloLGMDZNerdFontPropo-Regular.ttf
+			curl -OL $LINK/Bold-Italic/MesloLGMDZNerdFont-BoldItalic.ttf
+			curl -OL $LINK/Bold-Italic/MesloLGMDZNerdFontMono-BoldItalic.ttf
+			curl -OL $LINK/Bold-Italic/MesloLGMDZNerdFontPropo-BoldItalic.ttf
+			curl -OL $LINK/Bold/MesloLGMDZNerdFont-Bold.ttf
+			curl -OL $LINK/Bold/MesloLGMDZNerdFontMono-Bold.ttf
+			curl -OL $LINK/Bold/MesloLGMDZNerdFontPropo-Bold.ttf
+			curl -OL $LINK/Italic/MesloLGMDZNerdFont-Italic.ttf
+			curl -OL $LINK/Italic/MesloLGMDZNerdFontMono-Italic.ttf
+			curl -OL $LINK/Italic/MesloLGMDZNerdFontPropo-Italic.ttf
 			;;
 			[nN][oO] | [nN]) echo "Skipping."
 			;;
