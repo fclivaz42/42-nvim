@@ -65,6 +65,12 @@ return {
 			procMacro = {
 				enable = true,
 			},
+			["rust-analyzer"] = {
+				checkOnSave = true,
+				check = {
+					command = "clippy"
+				}
+			}
 		}
 	},
 	-- codelldb = {},
